@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Error Plot</title>
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script>
+		var chart; // global
+		var ID = 0;
+		/**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+		function requestData() {
+			$.ajax({
+				type: 'GET',
+				url: 'get_data.php',
+				data: "ID=" + ID,
+				success: function(point) {
+					var series = chart.series[0],
+						shift = series.data.length > 10000; // shift if the series is longer than 20
+		
+					//alert(chart.series[0]);
+					// add the point
+						//alert(point[0]);
+						//alert(point[1]);;
+						//alert(point.length);
+					if(point.length != 0)
+					{
+					 	for(var i = 0; i < point.length; i++)
+					 	{
+							chart.series[0].addPoint(eval(point[i]), true, shift);
+							//chart.series[0].addPoint(eval(point[1]), true, shift);
+						}
+							
+					 //alert(ID);
+					//chart.series[0].setData(eval(point),true,shift);
+					// call it again after one second
+					 //alert(point[99][0]);
+					 //ID = ID + 100;
+					 //ID = point[point.length-1][0];
+					 //ID = point[100][1];
+					}
+					/*else
+					{
+
+						ID++;
+
+					}*/
+
+					ID++;
+					setTimeout(requestData,1000);	
+				},
+				cache: false
+			});
+		}
+				$(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'spline',
+					events: {
+						load: requestData
+					}
+				},
+				title: {
+					text: ''
+				},
+				 credits: {
+                    enabled: false
+                },
+				xAxis: {
+					min: 0, max:100,
+					title: {
+                    text: 'Time',
+                    style:{
+							color: 'black',
+							fontSize: '12px',
+							fontWeight:'bold'
+					}
+                },
+				labels:{
+						style:{
+							color: 'black',
+							fontSize: '10px',
+							fontWeight:'bold'
+						}
+
+					},
+					tickInterval: 10
+				},
+		plotOptions: {
+                  series: {
+                marker: {
+                    enabled: false
+                }
+            }},
+				yAxis: {
+					labels:{
+						style:{
+							color: 'black',
+							fontSize: '10px',
+							fontWeight:'bold'
+						}
+
+					},
+					 min: 0, max: 0.2,
+                    tickInterval: 0.1,
+					//minPadding: 0.2,
+					//maxPadding: 0.2,
+					title: {
+						text: 'Error',
+						//margin: 80
+						style:{
+							color: 'black',
+							fontSize: '12px',
+							fontWeight:'bold'
+						}
+					}
+				},
+				series: [{
+					color:'#0000A0',
+					showInLegend: false,
+                    name: 'Error',
+					data: []
+				}]
+			});		
+		});
+		</script>
+		</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<center> <b>Damping Estimation Error</b></center>
+		<div id="container" style="width: 1225px; height: 370px; margin: 0 auto"></div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Traffic Plot</title>
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script>
+		var chart; // global
+		var last_timestamp = 3;
+		/**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+		function requestData() {
+			
+			//setTimeout(requestData,2000);
+			
+			$.ajax({
+				type: 'GET',
+				url: 'get_data_traffic.php',
+				data: "last_timestamp=" + last_timestamp,
+				success: function(records) {
+					//alert(records);
+					//alert(records.length)
+					
+					noise = {};
+					control = [];
+					total = [];
+					
+					if(records.length != 0) {
+					 	for(var itr = 0; itr < records.length; itr++) {
+					 		record = records[itr];
+					 		created = Math.round((record['created']));
+					 		if(record['port'] == "out-uc-0"){
+					 			noise[created] = record['bytes'];
+					 		}else{
+					 			control[created] = record['bytes'];
+					 		}
+					 		
+					 		if(created in total){
+					 			total[created] = total[created] + record['bytes'];
+					 		}else{
+					 			total[created] = record['bytes'];
+					 		}
+						}
+					}
+					
+					for(key in noise){
+						//alert([key, noise[key]]);
+						noise_series = chart.series[0]; 
+						noise_series.addPoint([parseInt(key), noise[key]]);
+					}
+					
+					for(key in control){
+						chart.series[1].addPoint([parseInt(key), control[key]]);
+					}
+					
+					for(key in total){
+						chart.series[2].addPoint([parseInt(key), total[key]]);
+					}
+					
+					last_timestamp = records[records.length - 1]['created'];
+				},
+				cache: false
+			});
+		}
+		
+		function createChart(container, title){
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: container,
+					type: 'spline',
+					events: {
+	                    load: function() {
+	                        // set up the updating of the chart each second
+	                        setInterval(requestData, 2000);
+	                    }
+	                }
+				},
+				title: {
+					text: title,
+					align: 'left',
+					style:{
+                    	fontSize: '14px',
+                    	fontWeight:'bold'
+                	} 
+				},
+				 credits: {
+                    enabled: false
+                },
+                plotOptions: {
+		        	series: {
+		            	marker: {
+		                	enabled: false
+		               	}
+		        	}
+				},
+				xAxis: {
+					min: 0, max:300,
+					tickInterval: 10,
+					title: {
+						text: 'Time',
+						style:{
+                        	color: 'black',
+                        	fontSize: '12px',
+                           	fontWeight:'bold'
+                        }
+					},
+					labels:{
+                        style:{
+                        	color: 'black',
+                        	fontSize: '10px',
+                           	fontWeight:'bold'
+                        }
+                	}
+				},
+				yAxis: {
+                    min: 0, max:12,
+                	tickInterval: 0.5,
+					title: {
+						text: 'MBps',
+						style:{
+                        	color: 'black',
+                        	fontSize: '12px',
+                           	fontWeight:'bold'
+                        }
+					},
+					labels:{
+                        style:{
+                        	color: 'black',
+                        	fontSize: '10px',
+                           	fontWeight:'bold'
+                        }
+                	},
+					plotBands: [{ // mark the weekend
+		                color: '#FCFFC5',
+		                from: 10,
+		                to: 10.5
+		            }]
+				},
+				series: [
+					{
+						color: '#FF0000',
+		               	showInLegend: true,
+		               	name: 'Noise',
+						data: []
+					},
+					{
+						color: '#00FF00',
+		               	showInLegend: true,
+		               	name: 'Controlled Traffic',
+						data: []
+					},
+					{
+						color: '#0000FF',
+		               	showInLegend: true,
+		               	name: 'Total Traffic',
+						data: []
+					}
+				]
+			});
+			return chart
+		}
+		
+		$(document).ready(function() {
+			createChart('container', 'Traffic Plot');		
+		});
+		</script>
+		</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 800px; height: 650px;"></div>
+	</body>
+</html>

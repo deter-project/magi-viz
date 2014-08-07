@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>CPU Utilization Heat Map</title>
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script>
+		var chart; // global
+		var numNodes = 100;
+        var numProcesses = 100;
+        var data;
+		/**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+		function requestData() {
+			//alert("requestData");
+			
+			setTimeout(requestData, 5000);
+	        
+			data = [];
+	        for(var nodeItr = 0; nodeItr < numNodes; nodeItr++) {
+	        	for(var procItr = 0; procItr < numProcesses; procItr++) {
+	        		data.push([nodeItr, procItr, Math.random()]);
+	        	}
+			}
+	        
+	        chart.series[0].setData([]);
+	        chart.series[0].setData(data);
+			
+			/* $.ajax({
+				type: 'GET',
+				url: 'get_cpu_util_data.php',
+				success: function(data) {
+					if(data.length != 0) {
+						chart.series[0].setData([]);
+						chart.series[0].setData(data);
+					}
+				}
+			}); */
+		}
+		
+		function createChart(container, title){
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: container,
+					type: 'heatmap'
+				},
+				
+				title: {
+					text: title,
+				},
+				
+				credits: {
+                    enabled: false
+                },
+                
+				xAxis: {
+					categories: [],
+					tickInterval: 3,
+					labels:{
+                        style:{
+                        	color: 'black',
+                        	fontSize: '10px',
+                           	fontWeight:'bold'
+                        }
+                	}
+				},
+				yAxis: {
+					categories: [],
+					labels:{
+                        style:{
+                        	color: 'black',
+                        	fontSize: '10px',
+                           	fontWeight:'bold'
+                        }
+                	},
+                	title: null
+				},
+				
+				colorAxis: {
+		            stops: [
+		                [0, '#3060cf'],
+		                [0.5, '#fffbbc'],
+		                [1, '#c4463a']
+		            ],
+		            min:0, max:1,
+		            labels:{
+                        enabled: false
+                    }
+		        },
+		        
+				series: [{
+					name: 'CPU Utilization',
+		            borderWidth: 1,
+		            tooltip: {
+		                pointFormat: '{point.x}, {point.y} : {point.value} %'
+		            },
+					data: []
+		        }]
+			});
+			return chart
+		}
+		
+		$(document).ready(function() {
+			createChart('container', 'Heat Map Plot');		
+		});
+		$(document).ready(function() {
+			requestData();		
+		});
+		</script>
+		</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 800px; height: 650px;"></div>
+	</body>
+</html>

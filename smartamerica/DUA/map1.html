@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.29.1"></script>
+    <style type="text/css">
+
+html, body, #map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.stations, .stations svg {
+  position: absolute;
+}
+
+.stations svg {
+  width: 60px;
+  height: 20px;
+  padding-right: 100px;
+  font: 10px sans-serif;
+}
+
+.stations circle {
+
+  stroke-width: 1.5px;
+}
+/*.stations polygon {
+   fill: #FFFF00;
+}*/
+
+/*#star_2{
+  fill:#0000A0;
+}*/
+
+#star_3{
+  fill: #00FF00;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script type="text/javascript">
+
+
+
+// Create the Google Map…
+function plot_map(lat,lot,zoom,color_star,C1,C2,C3,C4,flag1)
+{
+ 
+ var map = new google.maps.Map(d3.select("#map").node(), {
+  zoom: zoom,
+  //center: new google.maps.LatLng(37.09024, -95.712891),
+  center: new google.maps.LatLng(lat,lot),
+  mapTypeControl: false,
+      draggable: false,
+      scaleControl: false,
+      scrollwheel: false,
+      navigationControl: false,
+      zoomControl: false,
+      disableDefaultUI: true,
+      streetViewControl: false,
+  mapTypeId: google.maps.MapTypeId.TERRAIN
+});
+
+  var lineSymbol = {
+    path: 'M 0,-0.5 0,0.5',
+    strokeOpacity: 1,
+    scale: 4,
+    fillOpacity: 1
+
+  };
+
+   if(flag1 == 0)
+  {
+    var lineCoordinates = [
+   new google.maps.LatLng(43.9,-118.5),
+    new google.maps.LatLng(41.314481,-113.402832)
+    ];
+
+       var lineCoordinates2 = [
+    new google.maps.LatLng(41.314481,-113.402832),
+    new google.maps.LatLng(42,-120.5)
+    ];
+
+    var lineCoordinates3 = [
+    new google.maps.LatLng(41.314481,-113.402832),
+    new google.maps.LatLng(36.9,-117)
+    ];
+
+    var lineCoordinates4 = [
+    new google.maps.LatLng(36,-114.6),
+    new google.maps.LatLng(41.314481,-113.402832)
+  ];
+
+  }
+  else if (flag1 == 1)
+  {
+
+    d3.json("starrg_1.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "#00FFFF")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+    var lineCoordinates = [
+      new google.maps.LatLng(0,0),
+      new google.maps.LatLng(0,0)
+    ];
+
+
+      var lineCoordinates2 = [
+
+      new google.maps.LatLng(44.5, -118.5),
+      new google.maps.LatLng(42,-120.5)
+    ];
+
+    var lineCoordinates3 = [
+      new google.maps.LatLng(44.5, -118.5),
+      new google.maps.LatLng(36.9,-117)
+    ];
+
+     var lineCoordinates4 = [
+      new google.maps.LatLng(44.5, -118.5),
+      new google.maps.LatLng(36,-114.6)
+    ];
+
+
+  }
+  else if (flag1 == 2)
+  {
+
+    d3.json("starrg_1.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "red")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+       var lineCoordinates = [
+       new google.maps.LatLng(42,-120.016602),
+      new google.maps.LatLng(43.9,-118.5)
+    ];
+
+
+      var lineCoordinates2 = [
+      new google.maps.LatLng(0,0),
+      new google.maps.LatLng(0,0)
+    ];
+
+    var lineCoordinates3 = [
+      new google.maps.LatLng(42,-120.016602),
+      new google.maps.LatLng(36.9,-117)
+    ];
+
+     var lineCoordinates4 = [
+      new google.maps.LatLng(42,-120.016602),
+      new google.maps.LatLng(36,-114.6)
+    ];
+
+      d3.json("starrg_2.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "#00FFFF")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+
+  }
+  else if (flag1 == 3)
+  {
+      d3.json("starrg_3.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "red")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+     var lineCoordinates = [
+      new google.maps.LatLng(36.9,-117),
+      new google.maps.LatLng(43.9,-118.5)
+    ];
+
+
+      var lineCoordinates2 = [
+      new google.maps.LatLng(36.9,-117),
+      new google.maps.LatLng(42,-120.5)
+    ];
+
+    var lineCoordinates3 = [
+      new google.maps.LatLng(0,0),
+      new google.maps.LatLng(0,0)
+    ];
+
+     var lineCoordinates4 = [
+      new google.maps.LatLng(36.9,-117),
+      new google.maps.LatLng(36,-114.6)
+    ];
+
+    d3.json("starrg_4.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "#00FFFF")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+}
+else if(flag1 == 4)
+{
+    d3.json("starrg_5.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "red")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+     var lineCoordinates = [
+      new google.maps.LatLng(36,-115.1),
+      new google.maps.LatLng(43.9,-118.5)
+    ];
+
+
+      var lineCoordinates2 = [
+      new google.maps.LatLng(36,-115.1),
+      new google.maps.LatLng(42,-120.5)
+    ];
+
+    var lineCoordinates3 = [
+      new google.maps.LatLng(36,-115.1),
+      new google.maps.LatLng(36.9,-117)
+    ];
+
+     var lineCoordinates4 = [
+      new google.maps.LatLng(0,0),
+      new google.maps.LatLng(0,0)
+    ];
+
+    d3.json("starrg_6.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("fill", "#00FFFF")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+
+}
+
+
+     var populationOptions = {
+      strokeColor: 'black',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: 'transparent',
+      map: map,
+      center: new google.maps.LatLng(33.9474,-116.193359),
+      radius: Math.sqrt(3857799) * 100
+    };
+
+    var populationOptions2 = {
+      strokeColor: 'black',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: 'transparent',
+      map: map,
+      center: new google.maps.LatLng(37.023986,-120.236328),
+      radius: Math.sqrt(3857799) * 100
+    };
+
+    var populationOptions3 = {
+      strokeColor: 'black',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: 'transparent',
+      map: map,
+      center: new google.maps.LatLng(40.316756,-122.257812),
+      radius: Math.sqrt(3857799) * 100
+    };
+
+    var populationOptions4 = {
+      strokeColor: 'black',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: 'transparent',
+      map: map,
+      center: new google.maps.LatLng(43.964696,-122.104004),
+      radius: Math.sqrt(3857799) * 100
+    };
+
+     var line = new google.maps.Polyline({
+    path: lineCoordinates,
+    strokeOpacity: 0,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0',
+      repeat: '20px'
+    }],
+    map: map
+  });
+
+    var line = new google.maps.Polyline({
+    path: lineCoordinates2,
+    strokeOpacity: 0,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0',
+      repeat: '20px'
+    }],
+    map: map
+  });
+
+    var line = new google.maps.Polyline({
+    path: lineCoordinates3,
+    strokeOpacity: 0,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0',
+      repeat: '20px'
+    }],
+    map: map
+  });
+
+   var line = new google.maps.Polyline({
+    path: lineCoordinates4,
+    strokeOpacity: 0,
+    icons: [{
+      icon: lineSymbol,
+      offset: '0',
+      repeat: '20px'
+    }],
+    map: map
+  });
+
+
+var cityCircle = new google.maps.Circle(populationOptions);
+var cityCircle = new google.maps.Circle(populationOptions2);
+var cityCircle = new google.maps.Circle(populationOptions3);
+var cityCircle = new google.maps.Circle(populationOptions4);
+
+// Load the station data. When the data comes back, create an overlay.
+d3.json("area1.json", function(data) {
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+      // Add a circle.
+      marker.append("svg:circle")
+          .attr("r", 3.5)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .attr("fill", C1);
+
+  function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      }
+
+	
+    };
+  };
+
+
+  // Bind our overlay to the map…
+  overlay.setMap(map);
+})
+
+d3.json("area2.json", function(data) {
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+      // Add a circle.
+      marker.append("svg:circle")
+          .attr("r", 3.5)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .attr("fill", C2);
+
+  function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      }
+
+  
+    };
+  };
+
+
+  // Bind our overlay to the map…
+  overlay.setMap(map);
+})
+
+  d3.json("area3.json", function(data) {
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+      // Add a circle.
+      marker.append("svg:circle")
+          .attr("r", 3.5)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .attr("fill", C3);
+
+  function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      }
+
+  
+    };
+  };
+
+
+  // Bind our overlay to the map…
+  overlay.setMap(map);
+})
+
+ d3.json("area4.json", function(data) {
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+      // Add a circle.
+      marker.append("svg:circle")
+          .attr("r", 3.5)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .attr("fill", C4);
+
+  function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      }
+
+  
+    };
+  };
+
+
+
+  // Bind our overlay to the map…
+  overlay.setMap(map);
+});
+
+d3.json("area0.json", function(data) {
+
+
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+      // Add a circle.
+      marker.append("svg:circle")
+          .attr("r", 3.5)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .attr("fill", "blue");
+
+  function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      }
+
+  
+    };
+  };
+
+
+  // Bind our overlay to the map…
+  overlay.setMap(map);
+})
+
+d3.json("starrg.json", function(data) {
+  //alert(data["ST1"]);
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("id", "star_3")
+   .attr("visibility", "visible")
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+
+d3.json("bigstar.json", function(data) {
+  var overlay = new google.maps.OverlayView();
+
+  // Add the container when the overlay is added to the map.
+  overlay.onAdd = function() {
+    var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+    // Draw each marker as a separate SVG element.
+    // We could use a single SVG, but what size would it have?
+    overlay.draw = function() {
+      var projection = this.getProjection(),
+          padding = 10;
+
+  //alert(d3.entries(data))
+      var marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+        .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+          
+  //alert(padding)
+   marker.append("svg:polygon")
+   .attr("id", "star_2")
+   .attr("visibility", "visible")
+   .attr("fill", color_star)
+   .attr("points", CalculateStarPoints(padding,padding, 5, 15, 5))
+
+  function CalculateStarPoints(centerX, centerY, arms, outerRadius, innerRadius)
+  {
+   var results = "";
+ 
+   var angle = Math.PI / arms;
+ 
+   for (var i = 0; i < 2 * arms; i++)
+   {
+      // Use outer or inner radius depending on what iteration we are in.
+      var r = (i & 1) == 0 ? outerRadius : innerRadius;
+      
+      var currX = centerX + Math.cos(i * angle) * r;
+      var currY = centerY + Math.sin(i * angle) * r;
+ 
+      // Our first time we simply append the coordinates, subsequet times
+      // we append a ", " to distinguish each coordinate pair.
+      if (i == 0)
+      {
+         results = currX + "," + currY;
+      }
+      else
+      {
+         results += ", " + currX + "," + currY;
+      }
+   }
+ 
+   return results;
+   }
+
+   
+      function transform(d) {
+        d = new google.maps.LatLng(d.value[1], d.value[0]);
+        d = projection.fromLatLngToDivPixel(d);
+        return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+      } 
+
+      // Bind our overlay to the map…
+  
+
+  };
+   };
+overlay.setMap(map);
+  
+});
+
+}
+//setTimeout(function(){plot_map(37.09024,-95.712891,5)},1000)
+/*setTimeout(function(){plot_map(39.76487,-115.41948,5,"blue",0)},1000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red",1)},18000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red",2)},62000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red",3)},111000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red",4)},168000)*/
+
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"blue","blue","blue","blue","blue",0)},1000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","blue","blue","blue","blue",1)},18000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","blue","blue","blue",2)},62000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","red","blue","blue",3)},114000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","red","red","blue",4)},170000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","blue","blue",1,1,0,0)},44000)
+//setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","red","blue",1,1,1,0)},74000)
+//setTimeout(function(){plot_map(40.714623,-74.006605,8)},6000)
+//setTimeout(function(){plot_map(37.09024,-95.712891,8)},8000)
+//setTimeout(function(){plot_map(37.09024,-95.712891,5)},10000)
+
+   </script>
+<NOSCRIPT>
+  </body>
+</html>
+

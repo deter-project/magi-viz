@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta http-equiv="refresh" content="200" /> 
+<html>
+<head>
+<script language="javascript" type="text/javascript">
+  function autoResize(id){ var newheight; var newwidth;
+
+if(document.getElementById){
+    newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+    newwidth=document.getElementById(id).contentWindow.document.body.scrollWidth;
+}
+document.getElementById(id).height= (newheight) + "px";
+document.getElementById(id).width= (newwidth) + "px"; }
+</script>
+</head>
+<body>
+	<table>
+<tr>
+<th><iframe class="map" src="map1.html" id="map" width="550" height="630" onload='autoResize(map);' frameborder="0"></iframe></th>
+<th>
+<table>
+<tr>
+<b>Communication Link Traffic Status</b>
+<th><iframe class="graph" src="trafflive1.html" id="map1" width="700" height="150" onload='autoResize(graph);' frameborder="0"></iframe></th>
+</tr>
+<tr>
+<th><iframe class="graph" src="trafflive2.html" id="map2" width="700" height="150" onload='autoResize(graph);' frameborder="0"></iframe></th>
+</tr>
+<tr>
+<th><iframe class="graph" src="trafflive3.html" id="map3" width="700" height="150" onload='autoResize(graph);' frameborder="0"></iframe></th>
+</tr>
+<tr>
+<th><iframe class="graph" src="trafflive4.html" id="map4" width="700" height="160" onload='autoResize(graph);' frameborder="0"></iframe></th>
+</tr>
+</table>
+</th>
+</tr>
+</table>
+    <iframe class="graph" src="dychart.html" id="map4" width="1245" height="420" onload='autoResize(graph);' frameborder="0"></iframe>
+</body>
+</html>
