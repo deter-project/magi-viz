@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>SSH Tunnel</title>
+		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="highcharts.js"></script>
+		
+		<script>
+			function get(name){
+			   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+			      return decodeURIComponent(name[1]);
+			}
+		
+			function createSSHTunnel(host) {
+				alert(host);
+				if(host != null){
+					alert('Creating tunnel');
+					$.ajax({
+						type: 'GET',
+						url: 'tunnel.php',
+						data: "host=" + host,
+						success: function(result) {
+							alert(result);
+							if (result == "Connection failed"){
+								alert('Not able to connect to the expriment');
+							}
+						},
+						cache: false
+					});
+				}
+			}
+			
+			$(document).ready(function() {
+				createSSHTunnel(get("host"));	
+			});
+		</script>
+		</head>
+	<body>
+	</body>
+</html>
