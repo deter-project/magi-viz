@@ -1,0 +1,12 @@
+Exporting data from experiment
+ssh users.isi.deterlab.net -L 31695:clientnode-1.clientserver55c.montage:27017 -f -o ExitOnForwardFailure=yes -N
+mongoexport --host localhost:31695 -d magi -c experiment_data --query "{'agent': 'monitor_agent'}" --out magi_cs55_experiment_data.json
+
+Importing data into local database
+../../util/populate_db.sh magi_cs55 experiment_data
+
+Canned Data Visualization
+http://localhost/magi-viz/casestudy/clientserver55/traffic.html
+
+Real time Visualization
+http://localhost/magi-viz/casestudy/clientserver55/traffic.html?host=clientnode-1.clientserver55c.montage

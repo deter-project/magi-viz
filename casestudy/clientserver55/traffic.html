@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Traffic Plot - Client Server 55 Case Study</title>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+		<script>
+			
+			/**
+			 * Request data from the server, add it to the graph and set a timeout to request again
+			 */
+			function requestData() {
+				//alert("requestData");
+				setTimeout(requestData, 1000);
+				$.ajax({
+					type: 'GET',
+					url: 'getTrafficGraphData.php',
+					data: "dbhost=localhost" + 
+							"&dbPort=" + dbPort + 
+							"&dbName=" + dbName +
+							"&lastTimestamp=" + lastTimestamp + 
+							"&recordsLimit=" + recordsLimit,
+					success: function(records) {
+						//alert(records);
+						var series = chart.series[0],
+							shift = series.data.length > 1000; // shift if the series is longer than 20
+						    if(records.length != 0)
+						    {
+						    	for(var i=0; i < records.length; i++)
+						     	{
+						     		//alert(records[i]);
+	                         		chart.series[0].addPoint(eval(records[i]), true, shift);
+							 	}
+						     	lastTimestamp = records[records.length - 1][0];
+							}
+							//alert(lastTimestamp);
+					},
+					cache: false
+				});
+			}
+			
+	        $(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'spline',
+						events: {
+							load: function () {
+		                    	plot("magi_cs55");
+		                    }
+						}
+					},
+					title: {
+						text: 'Case Study Client Server 55: Aggregated Traffic between Clients and Servers',
+						align: 'left',
+							style:{
+	                    	fontSize: '12px',
+	                    	fontWeight: 'bold'
+	                	} 
+					},
+					 credits: {
+	                    enabled: false
+	                },
+					xAxis: {
+						min: 0, max: 60,
+						title: {
+							text: 'Time(sec)',
+							style:{
+								color: 'black',
+								fontSize: '12px',
+								fontWeight:'bold'
+								}
+							},
+					    labels:{
+							style:{
+								color: 'black',
+								fontSize: '10px',
+								fontWeight:'bold'
+							}
+	
+						},
+						tickInterval: 5
+					},
+					plotOptions: {
+			        	series: {
+			                marker: {
+			                    enabled: false
+			                }
+			            }
+					},
+					yAxis: {
+						labels:{
+							style:{
+								color: 'black',
+								fontSize: '10px',
+								fontWeight:'bold'
+							}
+	
+						},
+						title: {
+							text: 'Traffic(Mbps)',
+							style:{
+								color: 'black',
+								fontSize: '12px',
+								fontWeight:'bold'
+							}
+						}
+					},
+					series: [{
+						color: '#FF0000',
+	                showInLegend: false,
+	                name: 'Traffic',
+						data: []
+					}]
+				});		
+			});
+	    </script>
+	</head>
+	<body>
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 680px; height: 420px;"></div>
+	</body>
+</html>
