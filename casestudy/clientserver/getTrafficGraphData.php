@@ -29,7 +29,7 @@
 	    foreach ( $cursor as $id => $value )
 	    {
 	        $relativeCreatedTime = round(($value["created"] - $tsFirstRecord), 8);
-	        $bytes = ($value["bytes"] * 8)/(1000000) ;
+	        $bytes = ($value["bytes"] * 8)/(1000) ;
 	        $record = array($relativeCreatedTime, $bytes);
 	        array_push($formatted_result, $record);
 	    }   
