@@ -1,4 +1,6 @@
 Exporting data from experiment
+(in case experiment data gets deleted or needs to be created in an offline mode)
+
 ssh users.isi.deterlab.net -L 28261:clientnode.clientserver.montage:27017 -f -o ExitOnForwardFailure=yes -N
 mongoexport --host localhost:28261 -d magi -c experiment_data --query "{'agent': 'monitor_agent'}" --out magi_cs_experiment_data.json
 
