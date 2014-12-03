@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<title></title>
+<style type="text/css">
+
+/*
+ * haiku.css_t
+ * ~~~~~~~~~~~
+ *
+ * Sphinx stylesheet -- haiku theme.
+ *
+ * Adapted from http://haiku-os.org/docs/Haiku-doc.css.
+ * Original copyright message:
+ *
+ *     Copyright 2008-2009, Haiku. All rights reserved.
+ *     Distributed under the terms of the MIT License.
+ *
+ *     Authors:
+ *              Francois Revol <revol@free.fr>
+ *              Stephan Assmus <superstippi@gmx.de>
+ *              Braden Ewing <brewin@gmail.com>
+ *              Humdinger <humdingerb@gmail.com>
+ *
+ * :copyright: Copyright 2007-2013 by the Sphinx team, see AUTHORS.
+ * :license: BSD, see LICENSE for details.
+ *
+ */
+
+@import url("basic.css");
+
+html {
+    margin: 0px;
+    padding: 0px;
+    background: #FFF url(bg-page.png) top left repeat-x;
+}
+
+body {
+    line-height: 1.5;
+    margin: auto;
+    padding: 0px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    min-width: 19em;
+    max-width: 40em;
+    color: #333333;
+}
+
+div.footer {
+    padding: 8px;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* link colors and text decoration */
+
+a:link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #dc3c01;
+}
+
+a:visited {
+    font-weight: bold;
+    text-decoration: none;
+    color: #892601;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+    color: #ff4500;
+}
+
+/* Some headers act as anchors, don't give them a hover effect */
+
+h1 a:hover, a:active {
+    text-decoration: none;
+    color: #0c3762;
+}
+
+h2 a:hover, a:active {
+    text-decoration: none;
+    color: #0c3762;
+}
+
+h3 a:hover, a:active {
+    text-decoration: none;
+    color: #0c3762;
+}
+
+h4 a:hover, a:active {
+    text-decoration: none;
+    color: #0c3762;
+}
+
+a.headerlink {
+    color: #a7ce38;
+    padding-left: 5px;
+}
+
+a.headerlink:hover {
+    color: #a7ce38;
+}
+
+/* basic text elements */
+
+div.content {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
+    font-size: 0.9em;
+}
+
+/* heading and navigation */
+
+div.header {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    height: 85px;
+    /* background: #eeeeee; */
+    padding: 0 40px;
+}
+div.header h1 {
+    font-size: 1.6em;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #0c3762;
+    border: 0;
+    margin: 0;
+    padding-top: 15px;
+}
+div.header h1 a {
+    font-weight: normal;
+    color: #0c3762;
+}
+div.header h2 {
+    font-size: 1.3em;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #aaa;
+    border: 0;
+    margin-top: -3px;
+    padding: 0;
+}
+
+div.header img.rightlogo {
+    float: right;
+}
+
+
+div.title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #0c3762;
+    border-bottom: dotted thin #e0e0e0;
+    margin-bottom: 25px;
+}
+div.topnav {
+    /* background: #e0e0e0; */
+}
+div.topnav p {
+    margin-top: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 0px;
+    text-align: right;
+    font-size: 0.8em;
+}
+div.bottomnav {:1
+    background: #eeeeee;
+}
+div.bottomnav p {
+    margin-right: 40px;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+a.uplink {
+    font-weight: normal;
+}
+
+
+/* contents box */
+
+table.index {
+    margin: 0px 0px 30px 30px;
+    padding: 1px;
+    border-width: 1px;
+    border-style: dotted;
+    border-color: #e0e0e0;
+}
+table.index tr.heading {
+    background-color: #e0e0e0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+table.index tr.index {
+    background-color: #eeeeee;
+}
+table.index td {
+    padding: 5px 20px;
+}
+
+table.index a:link, table.index a:visited {
+    font-weight: normal;
+    text-decoration: none;
+    color: #dc3c01;
+}
+table.index a:hover, table.index a:active {
+    text-decoration: underline;
+    color: #ff4500;
+}
+
+
+/* Haiku User Guide styles and layout */
+
+/* Rounded corner boxes */
+/* Common declarations */
+div.admonition {
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border-style: dotted;
+    border-width: thin;
+    border-color: #dcdcdc;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+div.note {
+    padding: 10px 15px 10px 80px;
+    background: #e4ffde url(alert_info_32.png) 15px 15px no-repeat;
+    min-height: 42px;
+}
+div.warning {
+    padding: 10px 15px 10px 80px;
+    background: #fffbc6 url(alert_warning_32.png) 15px 15px no-repeat;
+    min-height: 42px;
+}
+div.seealso {
+    background: #e4ffde;
+}
+
+/* More layout and styles */
+h1 {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #0c3762;
+    border-bottom: dotted thin #e0e0e0;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #0c3762;
+    border-bottom: dotted thin #e0e0e0;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #0c3762;
+    margin-top: 30px;
+}
+
+h4 {
+    font-size: 1.0em;
+    font-weight: normal;
+    color: #0c3762;
+    margin-top: 30px;
+}
+
+p {
+    text-align: justify;
+}
+
+p.last {
+    margin-bottom: 0;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+ul {
+    padding-left: 5px;
+    margin-top: 3px;
+}
+
+li {
+    line-height: 1.3;
+}
+
+div.content ul > li {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background: transparent url(bullet_orange.png) no-repeat scroll left 0.45em;
+    list-style-image: none;
+    list-style-type: none;
+    padding: 0 0 0 1.666em;
+    margin-bottom: 3px;
+}
+
+td {
+    vertical-align: top;
+}
+
+tt {
+    background-color: #e2e2e2;
+    font-size: 1.0em;
+    font-family: monospace;
+}
+
+pre {
+    border-color: #0c3762;
+    border-style: dotted;
+    border-width: thin;
+    margin: 0 0 12px 0;
+    padding: 0.8em;
+    background-color: #f0f0f0;
+}
+
+hr {
+    border-top: 10px solid #ccc;
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+/* printer only pretty stuff */
+@media print {
+    .noprint {
+        display: none;
+    }
+    /* for acronyms we want their definitions inlined at print time */
+    acronym[title]:after {
+        font-size: small;
+        content: " (" attr(title) ")";
+        font-style: italic;
+    }
+    /* and not have mozilla dotted underline */
+    acronym {
+        border: none;
+    }
+    div.topnav, div.bottomnav, div.header, table.index {
+        display: none;
+    }
+    div.content {
+        margin: 0px;
+        padding: 0px;
+    }
+    html {
+        background: #FFF;
+    }
+}
+
+.viewcode-back {
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+}
+
+div.viewcode-block:target {
+    background-color: #f4debf;
+    border-top: 1px solid #ac9;
+    border-bottom: 1px solid #ac9;
+    margin: -1px -10px;
+    padding: 0 12px;
+}
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<div class="section" id="attack-resilient-wide-area-monitoring-of-power-systems">
+<h1>Attack Resilient Wide Area Monitoring of Power Systems</h1>
+<img alt="_static/saconcept.png" src="_static/saconcept.png" style="width: 650px;" />
+<p>In this project,
+we demonstrated a real-time distributed optimization algorithm
+based on Alternating Directions Method of Multipliers (ADMM) for estimating the electro-mechanical oscillation modes of large power system networks using <em>Synchrophasors</em>.
+We partitioned the
+network topology to be divided into multiple clusters, with each cluster equipped with a local estimator at the local control center.
+The local estimators receive  Synchrophasor measurements from within their own respective areas, run a local consensus algorithm, and communicate their estimates to an estimator.
+We illustrated  our results using a hardware-in-loop power system emulation testbed at NC State federated with <a class="reference external" href="http://www.deter-project.org">DETERLab</a>.</p>
+<p>As part of the SmartAmerica exposition,
+we implemented and demonstrated the resiliency of the proposed algorithm.
+We first showed that in the current state-of-art (<a class="reference external" href="http://tau.isi.edu/magi-viz/smartamerica/CA">Case I</a> ),
+the error in the estimation is high in the presence of the attack.
+We then showed that in the next-generation algorithms proposed and implemented by our team (<a class="reference external" href="http://tau.isi.edu/magi-viz/smartamerica/DA">Case II</a> ),
+the error in the estimation stays low even in the presence of the attack.</p>
+<dl class="docutils">
+<dt>The Demonstrations are available as:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://tau.isi.edu/magi-viz/smartamerica/CA">Case I: A Centralized Estimator with high error during cyber attacks</a></li>
+<li><a class="reference external" href="http://tau.isi.edu/magi-viz/smartamerica/DA">Case II: A Distributed Estimator resilient to cyber attacks</a></li>
+</ul>
+</dd>
+<dt>Addtional information on the above scenarios is available as:</dt>
+<dd><ul class="first last simple">
+<li>Alefiya Hussain and Aranya Chakrabortty, &quot;<a class="reference external" href="http://www.isi.edu/~hussain/publications/SmartAmerica14b.pdf">Design and Anaylsis of Wide-Area Resilient Control Algorithms for Large-Scale Power Systems: Theoretical and Experimental Methods</a>&quot;. Poster presented at the SmartAmerica Exposition, June 2014, Washington DC</li>
+<li>Jianhua Zhang, Prateek Jaipuria, Aranya Chakrabortty, and Alefiya Hussain, &quot;<a class="reference external" href="http://www.isi.edu/~hussain/publications/Zhang14a.pdf">Distributed Optimization Algorithms for Attack-Resilient Wide-Area Monitoring of Power Systems: Theoretical and Experimental Methods</a>&quot;, In the proceedings of GameSec Conference, November 2014, Marina Del Rey, CA.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="smartamerica-exposition">
+<h1>SMARTAMERICA Exposition</h1>
+<a class="reference external image-reference" href="http://www.smartamerica.org/"><img alt="_static/logo.png" src="_static/logo.png" /></a>
+<p>The <a class="reference external" href="http://www.smartamerica.org">SmartAmerica Challenge</a>  was a White House Presidential Innovation Fellow project to bring together research in Cyber-Physical Systems (CPS) and test-beds from different sectors.
+On June 11 2014, our team demonstrated SmartEnergy algorithms and technologies
+using the DHS-funded DETERLab facilities at the Washington DC Convention Center. Our team was comprised of
+Iowa State University, MITRE Corporation, National Instrument, NREL
+North Carolina State University, Penn State University, Scitor Corporation,
+University of North Carolina, Chapel Hill, and the University of Southern California, Information Sciences Institute</p>
+<p>In the challenge, the term &quot;cyber-physical system&quot; indicated a combination of the physical entities that were
+controlled dynamically to improve security and resiliency of the SmartGrid. Using the DETERLab technologies, such at <a class="reference external" href="http://montage.deterlab.net/magi">MAGI</a> and <a class="reference external" href="http://fedd.deterlab.net">Federation</a>,
+we demonstatrated next generation distributed wide area oscillation
+monitoring algorithms that are significantly more robust to cyber attacks and super storm disruptions.</p>
+</div>
+<div class="section" id="our-team-and-goals">
+<h1>Our Team and Goals</h1>
+<img alt="_static/Smart-Energy.jpg" src="_static/Smart-Energy.jpg" style="width: 650px;" />
+<p>Our world is changing how energy is produced, distributed and consumed. We have the opportunity to determine our nation’s role in this transformation.
+Our team, comprised of five leading universities, one national lab and three industrial corporations, headquartered in eight states, will demonstrate a set of synergistic scenarios that must fuel ongoing analysis, research and development to inform policy makers and researchers in order to ensure that our country will achieve the benefits of an Industrial Internet.</p>
+<p>Benefit of the project includes: First, we provide extensible research testbeds integrated across four leading universities providing research infrastructure for fundamental research and national-level grid exercises. These capabilities aimed at combatting a new generation of advanced persistent threats, cyber-attack actors and advanced nation state adversaries, advance our homeland security preparedness. Second, US-manufactured smart sensor technologies enable wide area and distributed monitoring, yielding regional and national-scale resilience to large scale disruptions such as super storms. Building on initial investments from the ARRA , we demonstrate new technologies, powered with skillsets that create meaningful jobs spanning our national middle class. Third, clean renewable energy generation, complimenting traditional generation assets, combining resurgence in natural gas to expand domestic energy generation. Our utilities, regulators, economists and other policy stakeholders need insight into the ideal and balanced mix of generation and transmission assets. Our introduction of serious gaming platforms models complex interactions and provides critical feedback for future policies that improve our economy, reduce carbon emissions and create new marketplace business opportunity.</p>
+</div>
+</div>
+</body>
+</html>

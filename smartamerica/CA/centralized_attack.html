@@ -13,7 +13,38 @@ document.getElementById(id).height= (newheight) + "px";
 document.getElementById(id).width= (newwidth) + "px"; }
 </script>
 </head>
+<title>
+Centralized Estimation: High Error During Cyber Attack 
+</title>
 <body>
+
+<h1> Case I: A Centralized Estimator with high error during cyber attacks </h1>
+
+<table>
+<tr>
+<td align="left" width="1245"> 
+In this scenario we deploy the current state-of-art estimation aglorithms to dampen 
+wide area oscillations in the power grid. 
+The results of this scenario can be visulized in three panel below.
+<p> 
+The panel on the left  
+shows the geo-spatial distribution of <b>synchophasors</b>, as blue dots, in the western region of the nation. 
+Some of the synchophasors are partiioned into four clusters. The estimation algorithm 
+is deployed at the central location indicated by a <b>star</b>. 
+<p>
+The right panel shows the network traffic in each cluster. The x-axis is time in seconds and the y-axis in 
+volume of traffic in Mbits per second. In the absence of an attack, there is norminal data and control 
+traffic on the network. The power grid is attacked in three stages. The 
+first attack occurs at ~15 seconds, followed by two more at ~40 seconds and ~75 seconds each. 
+These are indicated by an increase in the volume of network traffic on the right panel and as a red clusters in the 
+left panel. 
+<p>
+The lowermost panel plots the error in damping estimation. As seen in the plot below, during an attack the error spikes 
+high which could result in cascading instabilities in the power grid. 
+</td>
+</tr>
+</table>
+
 <table>
 <tr>
 <th><iframe class="map" src="map1.html" id="map" width="550" height="630" onload='autoResize(map);' frameborder="0"></iframe></th>
