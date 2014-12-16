@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<script language="javascript" type="text/javascript">
+  		function autoResize(id){ 
+  			var newheight; var newwidth;
+
+			if(document.getElementById){
+			    newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+			    newwidth=document.getElementById(id).contentWindow.document.body.scrollWidth;
+			}
+			document.getElementById(id).height= (newheight) + "px";
+			document.getElementById(id).width= (newwidth) + "px"; 
+		}
+	</script>
+</head>
+
+<title>
+	DNS Man-in-the-Middle Attack 
+</title>
+
+<body>
+	<table>
+		<tr>
+			<th>
+				<iframe class="graph" src="traffic_auth.html" id="map1" width="600" height="325" onload='autoResize(graph);' frameborder="0">
+				</iframe>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<iframe class="graph" src="traffic_attack.html" id="map2" width="600" height="325" onload='autoResize(graph);' frameborder="0">
+				</iframe>
+			</th>
+		</tr>
+	</table>
+</body>
+
+</html>

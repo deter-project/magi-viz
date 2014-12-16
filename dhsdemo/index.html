@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="refresh" content="65" />
+<html>
+	<head>
+		<script language="javascript" type="text/javascript">
+	  		function autoResize(id){ 
+	  			var newheight; var newwidth;
+	
+				if(document.getElementById){
+				    newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+				    newwidth=document.getElementById(id).contentWindow.document.body.scrollWidth;
+				}
+				document.getElementById(id).height= (newheight) + "px";
+				document.getElementById(id).width= (newwidth) + "px"; 
+			}
+		</script>
+	</head>
+	<body>
+		<table border=1>
+			<tr>
+				<th width=600 height="685">
+					<table border=1>
+						<tr>
+							<th width=600 height="160">
+								<iframe class="graph" align="center" src="topo.html" id="map1" width="600" height="160" onload='autoResize(graph);' frameborder="0">
+								</iframe>
+							</th>
+						</tr>
+						<tr>
+							<th width=300 height="475">
+								<table>
+									<tr>
+										<th width="300" height="475">
+											Static Procedure
+											<iframe class="graph" src="aal_svg.html" id="map2" width="300" height="475" onload='autoResize(graph);' frameborder="0">
+											</iframe>
+										</th>
+										<th width="300" height="525">
+											Real Time State
+											<iframe class="graph" src="orch.html" id="map2" width="300" height="475" onload='autoResize(graph);' frameborder="0">
+											</iframe>
+										</th>
+									</tr>
+								
+								</table>
+							</th>
+						</tr>
+					</table>
+				</th>
+				<th width=650 height="685">
+				    <iframe class="graph" src="graph.html" id="map2" width="620" height="685" onload='autoResize(graph);' frameborder="0">
+					</iframe>
+				</th>
+			</tr>
+		</table>
+	</body>
+</html>

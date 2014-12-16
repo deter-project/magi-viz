@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Traffic Plot</title>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+		<script>
+			
+			/**
+			 * Request data from the server, add it to the graph and set a timeout to request again
+			 */
+			function requestData() {
+				//alert("requestData");
+				setTimeout(requestData, 1000);
+				$.ajax({
+					type: 'GET',
+					url: 'getTrafficGraphData_auth.php',
+					data: "dbhost=localhost" + 
+							"&dbPort=" + dbPort + 
+							"&dbName=" + dbName +
+							"&lastTimestamp=" + lastTimestamp + 
+							"&recordsLimit=" + recordsLimit,
+					success: function(records) {
+						//alert(records);
+						var series = chart.series[0],
+							shift = series.data.length > 1000; // shift if the series is longer than 20
+						    if(records.length != 0)
+						    {
+						    	for(var i=0; i < records.length; i++)
+						     	{
+						     		//alert(records[i]);
+	                         		chart.series[0].addPoint(eval(records[i]), true, shift);
+							 	}
+						     	lastTimestamp = records[records.length - 1][0];
+							}
+							//alert(lastTimestamp);
+					},
+					cache: false
+				});
+			}
+			
+	        $(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'scatter',
+						events: {
+							load: function () {
+		                    	plot("dnsmitm");
+							}
+						}
+					},
+					credits: { enabled: false },
+					title: {
+						text: ''
+					},
+					subtitle: {
+			            text: 'Node: Auth',
+			            style: { fontSize: '14px' , fontWeight: 'bold', color: 'black' }, 
+			        },
+			        xAxis: {
+			            min:0, max: 60,
+			            title: {
+			                enabled: true,
+			                text: 'Time in Seconds'
+			            },
+			            startOnTick: true,
+			            endOnTick: true,
+			            showLastLabel: true
+			        },
+			        yAxis: {
+			            min: 0, max: 10,
+			            title: {
+			                text: 'Requests'
+			            }
+			        },
+			        plotOptions: {
+			            scatter: {
+			                marker: {
+			                    radius: 5,
+			                    states: {
+			                        hover: {
+			                            enabled: true,
+			                            lineColor: 'rgb(100,100,100)'
+			                        }
+			                    }
+			                },
+			                states: {
+			                    hover: {
+			                        marker: {
+			                            enabled: false
+			                        }
+			                    }
+			                },
+			                tooltip: {
+			                    headerFormat: '<b>{series.name}</b><br>',
+			                    pointFormat: '{point.x} time, {point.y} requests'
+			                }
+			            }
+			        },
+					series: [{
+						color: '#0000FF',
+						showInLegend: false,
+						name: 'Traffic',
+						data: []
+					}]
+				});		
+			});
+	    </script>
+	</head>
+	<body>
+		<!-- 3. Add the container -->
+		<div id="container" style="height:300px;width:575px"></div>
+	</body>
+</html>

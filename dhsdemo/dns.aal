@@ -1,0 +1,70 @@
+## The mapping from the AAL procedure to the experiment apparatus 
+groups:
+  client_group: [client]
+  attacker_group: [attacker]
+  auth_group: [auth]
+  monitor_group: [attacker, auth]
+  
+## The agent implementation and addressing information 
+agents:
+  monitor_agent:
+    group: monitor_group
+    path: /share/magi/modules/pktcounters/pktCountersAgent.tar.gz
+    execargs: []
+
+  ping_agent:
+    group: client_group
+    path: /share/magi/modules/ping/ping.tar.gz
+    execargs: []
+
+  attack_agent:
+    group: client_group
+    path: /share/magi/modules/dnsattack/dnsattack.tar.gz
+    execargs: []
+    
+  defense_agent:
+    group: client_group
+    path: /share/magi/modules/dnsdefense/dnsdefense.tar.gz
+    execargs: []
+    
+streamstarts: [ mainstream ]
+
+eventstreams:
+
+  mainstream: 
+      - type: event
+        agent: monitor_agent 
+        method: startCollection
+#        trigger: monitorStarted 
+        args: {}
+
+#      - type: trigger
+#        triggers: [ { event: monitorStarted} ] 
+
+      - type: event
+        agent: ping_agent 
+        method: startPing 
+#        trigger: pingStarted 
+        args: {} 
+
+      - type: trigger
+        triggers: [ { timeout: 20000 } ]
+        
+      - type: event
+        agent: attack_agent 
+        method: startAttack
+        args: {}
+
+      - type: trigger
+        triggers: [ { timeout: 20000 } ]
+
+      - type: event
+        agent: defense_agent
+        method: startDefense
+        args: {}
+      
+      - type: trigger
+        triggers: [ { timeout: 20000, target: exit } ]
+        
+################################################
+
