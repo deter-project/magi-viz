@@ -11,7 +11,7 @@ $lport = 20000 + ($substring % 20000);
 
 $rport = 27017;
 
-$ssh_cmd = "ssh jaipuria@users.isi.deterlab.net -L $lport:$host:$rport -f -o ExitOnForwardFailure=yes -N";
+$ssh_cmd = "ssh muser@users.isi.deterlab.net -L $lport:$host:$rport -f -o ExitOnForwardFailure=yes -N";
 
 #Output needs to redirected for the command execution 
 #to return after setting up the tunnel
