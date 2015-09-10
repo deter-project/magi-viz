@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Orchestration Logs</title>
+		
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+		<script>
+
+			/**
+			 * Request data from the server, add it to the graph and set a timeout to request again
+			 */
+			function requestData() {
+				//alert("requestData");
+				setTimeout(requestData,1000);
+				$.ajax({
+					type: 'GET',
+					url: 'getOrchLogs.php',
+					data: "dbhost=localhost" + 
+							"&dbPort=" + dbPort + 
+							"&dbName=" + dbName +
+							"&lastTimestamp=" + lastTimestamp + 
+							"&recordsLimit=" + recordsLimit,
+					success: function(records) {
+						//alert('success');
+						//alert(JSON.stringify(records));
+						//alert(records.length);
+						
+						logs = []
+						
+						if(records.length != 0) {
+						 	for(var itr = 0; itr < records.length; itr++) {
+						 		record = records[itr];
+						 		created_ms = record['created'] * 1000;
+						 		created_date = new Date(created_ms);
+						 		created_time = "{0}:{1}:{2}".format(
+						 				created_date.getHours(),
+						 				created_date.getMinutes(),
+						 				created_date.getSeconds());
+						 		logs.push("<pre>{0}\t : {1} : ({2}) {3}".format(
+						 				record['stream'], record['type'], 
+						 				created_time, record['msg']))
+							}
+						 	lastTimestamp = records[records.length - 1]['created'];
+						}
+						
+						//alert(JSON.stringify(logs));
+						
+						var div = document.getElementById('container');
+						
+						for (var itr = 0; itr < logs.length; itr++) {
+							//alert(logs[itr]);
+							div.innerHTML = logs[itr] + div.innerHTML;
+						}
+
+						//alert(lastTimestamp);
+					},
+					cache: false
+				});
+			}
+			
+			$(document).ready(function() {
+				plot("magi", 2);		
+			});
+		</script>
+	</head>
+	<body>
+		<div id="container" style="width: 800px; height: 650px;">
+		<pre> Waiting for orchestration to start. </pre>
+		</div>
+	</body>
+</html>
