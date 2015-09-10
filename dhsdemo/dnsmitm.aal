@@ -1,0 +1,25 @@
+
+
+main:
+
+   method: instrument monitor at attacker and auth
+
+    method: ping 
+    args: 
+         dest: www.google.com
+
+
+    trigger: wait for 20 secs
+
+    method: start attack 
+
+
+    trigger: wait for 20 secds
+
+    method: start dnssec defense 
+
+    trigger: wait for 20 secs 
+
+    exit: 
+
+

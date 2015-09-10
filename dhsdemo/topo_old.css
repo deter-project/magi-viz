@@ -1,0 +1,30 @@
+body {
+  overflow: hidden;
+  margin: 0;
+  font: 40px "Helvetica Neue";
+  position: absolute;
+  top: 0;
+}
+
+svg {
+  width: 1280px;
+  height: 800px;
+}
+
+rect {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2;
+  pointer-events: all;
+}
+
+line {
+  fill: none;
+  stroke-width: 2;
+}
+
+path {
+  fill: none;
+  stroke-width: 2;
+}
+
