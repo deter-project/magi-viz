@@ -226,7 +226,7 @@ var cityCircle = new google.maps.Circle(populationOptions3);
 var cityCircle = new google.maps.Circle(populationOptions4);
 
 // Load the station data. When the data comes back, create an overlay.
-d3.json("area1.json", function(data) {
+d3.json("data/area1.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -271,7 +271,7 @@ d3.json("area1.json", function(data) {
   overlay.setMap(map);
 })
 
-d3.json("area2.json", function(data) {
+d3.json("data/area2.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -316,7 +316,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 })
 
-  d3.json("area3.json", function(data) {
+  d3.json("data/area3.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -361,7 +361,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 })
 
- d3.json("area4.json", function(data) {
+ d3.json("data/area4.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -407,7 +407,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 });
 
-d3.json("area0.json", function(data) {
+d3.json("data/area0.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -454,7 +454,7 @@ d3.json("area0.json", function(data) {
 
 
 
-d3.json("bigstar.json", function(data) {
+d3.json("data/bigstar.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -532,13 +532,10 @@ overlay.setMap(map);
 
 }
 //setTimeout(function(){plot_map(37.09024,-95.712891,5)},1000)
-setTimeout(function(){plot_map(39.76487,-115.41948,5,"blue","blue","blue","blue",0,0,0,0)},1000)
-setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","blue","blue","blue",1,0,0,0)},16000)
-setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","blue","blue",1,1,0,0)},54000)
-setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","red","blue",1,1,1,0)},97000)
-//setTimeout(function(){plot_map(40.714623,-74.006605,8)},6000)
-//setTimeout(function(){plot_map(37.09024,-95.712891,8)},8000)
-//setTimeout(function(){plot_map(37.09024,-95.712891,5)},10000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"blue","blue","blue","blue",0,0,0,0)},0000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","blue","blue","blue",1,0,0,0)},1000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","blue","blue",1,1,0,0)},5000)
+setTimeout(function(){plot_map(39.76487,-115.41948,5,"red","red","red","blue",1,1,1,0)},9000)
 
    </script>
 <NOSCRIPT>

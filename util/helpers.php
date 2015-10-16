@@ -19,6 +19,10 @@
 	{
 		$dbName = $_GET['dbName'];
 	}
+	if(isset($_GET['collectionName']))
+    {
+        $collectionName = $_GET['collectionName'];
+    }
 	if(isset($_GET['lastTimestamp']))
 	{
 		$relativeLastTimeStamp = $_GET['lastTimestamp'];

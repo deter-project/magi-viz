@@ -21,78 +21,23 @@
 		 */
 		function requestData() {
 
-	         
-
 			$.ajax({
 				type: 'GET',
-				url: 'get_data.php',
+				url: 'get_error_data.php',
 				data: "ID=" + ID,
 				success: function(point) {
 					var series = chart.series[0],
-						shift = series.data.length > 10000; // shift if the series is longer than 20
-					
-					//text = "Server is up";
-					//alert(chart.series[0]);
-					// add the point
-						//alert(point[0]);
-						//alert(point[1][0]);
-						//alert(point.length);
-						//alert(chart.options.labels.items[0].html);
-					/*if(point[0][0] < 11)
-					{
-
-						chart.options.labels.items[0].html="Hello World";
-						//alert(chart.options.labels.items[0].html);
-						 //chart = new Highcharts.Chart(chart.options);
-						 //chart.render();
-						//flag = 1;
-
-					}
-					else if (point[0][0] > 11)
-					{
-							chart.options.labels.items[0].html="Hello World1";
-						//alert(chart.options.labels.items[0].html);
-						 //chart = new Highcharts.Chart(chart.options);
-						  //chart.render();
-
-					}*/
-
+					shift = series.data.length > 10000; // shift if the series is longer than 20
 					
 					if(point.length != 0)
-					{
-					 	for(var i = 0; i < point.length; i++)
-					 	{
-							chart.series[0].addPoint(eval(point[i]), true, shift);
-							//chart.series[0].addPoint(eval(point[1]), true, shift);
-
-						}
-						//chart.series[0].graph.attr('stroke','green');
-						//chart.series[0].title("This is a Test");	
-					 //alert(ID);
-					//chart.series[0].setData(eval(point),true,shift);
-					// call it again after one second
-					 //alert(point[99][0]);
-					 //ID = ID + 100;
-					 //ID = point[point.length-1][0];
-					 //ID = point[100][1];
-					}
-
-					/*else
-					{
-
-						ID++;
-
-					}*/
-					//$("#error").text('Test message here');
-					/*if(point.length == 0)
-					{
-
-							chart.series[0].graph.attr('stroke','green');
-
-					}*/
-
-					ID++;
-					setTimeout(requestData,1000);	
+                    {
+                        for(var i = 0; i < point.length; i+=5)
+                        {
+                            chart.series[0].addPoint(eval(point[i]), true, shift);
+                        }
+                    }
+                    ID = ID + 5;
+					setTimeout(requestData,250);	
 				},
 				cache: false
 			});
@@ -205,30 +150,14 @@
                 fontSize: '14px',
                 fontWeight:'bold'
             })
-            .add();},1000);
+            .add();},0000);
         	
-           /* setTimeout(function() {title.attr({
-                text:'Server 1 is down and Server 2 is up'
-            });},18000);
-
-            setTimeout(function() {title.attr({
-                text:'Server 2 is down and Server 3 is up'
-            });},62000);
-
-            setTimeout(function() {title.attr({
-                text:'Server 3 is down and Server 4 is up'
-            });},114000);
-
-            setTimeout(function() {title.attr({
-                text:'Server 4 is down and Server 5 is up'
-            });},170000);*/
-			
 			 setTimeout(function() { title = chart.renderer.text("Server 2 up", 200, 90)
             .css({
                 fontSize: '14px',
                 fontWeight:'bold'
             })
-            .add();},18000);
+            .add();},2000);
 
 
 			 setTimeout(function() { title = chart.renderer.text("Server 3 up", 400, 90)
@@ -236,7 +165,7 @@
                 fontSize: '14px',
                 fontWeight:'bold'
             })
-            .add();},62000);
+            .add();},6500);
              
 
 			 setTimeout(function() { title = chart.renderer.text("Server 4 up", 650, 90)
@@ -244,14 +173,14 @@
                 fontSize: '14px',
                 fontWeight:'bold'
             })
-            .add();},114000);
+            .add();},11000);
 
 			 setTimeout(function() { title = chart.renderer.text("Server 5 up", 920, 90)
             .css({
                 fontSize: '14px',
                 fontWeight:'bold'
             })
-            .add();},170000);
+            .add();},16000);
              
              
             });		

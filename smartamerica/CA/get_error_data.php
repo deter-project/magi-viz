@@ -15,10 +15,9 @@ $uid = $_GET['ID'];
   
   // access database
   $db = $conn->magi;
-  $collection = $db->pronyerrors_a;
+  $collection = $db->rlserrors_a;
   //$query = array('error' => 1);
- $first = $collection->find(array("itr" => 22), array("error" => 1, "created" => 1))->limit(1);
- //$cursor = $collection->find(array("itr" => array('$gt' => (int)$uid, '$lte' => (int)$uid + 100)), array("error" => 1, "created" => 1))->limit(100);
+ $first = $collection->find(array("itr" => 0), array("error" => 1, "created" => 1))->limit(1);
  
 
   //var_dump($first);
@@ -32,7 +31,7 @@ $uid = $_GET['ID'];
   }
   $newts = (float)$uid + $first_ts;
   //echo $newts;
-  $cursor = $collection->find(array("created" => array('$gt' => $newts,'$lt' => $newts + 1)), array("error" => 1, "created" => 1))->limit(500);
+  $cursor = $collection->find(array("created" => array('$gt' => $newts,'$lt' => $newts + 5)), array("error" => 1, "created" => 1))->limit(500);
   //var_dump($cursor);
 
 foreach ( $cursor as $id => $value )
