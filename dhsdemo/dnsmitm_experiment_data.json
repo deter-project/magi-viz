@@ -1,0 +1,142 @@
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f133" }, "created" : 0, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f134" }, "created" : 0, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f135" }, "created" : 1, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f136" }, "created" : 1, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f137" }, "created" : 2, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f138" }, "created" : 2, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f139" }, "created" : 3, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13a" }, "created" : 3, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13b" }, "created" : 4, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13c" }, "created" : 4, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13d" }, "created" : 5, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13e" }, "created" : 5, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f13f" }, "created" : 6, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f140" }, "created" : 6, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f141" }, "created" : 7, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f142" }, "created" : 7, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f143" }, "created" : 8, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f144" }, "created" : 8, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f145" }, "created" : 9, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f146" }, "created" : 9, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f147" }, "created" : 10, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f148" }, "created" : 10, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f149" }, "created" : 11, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14a" }, "created" : 11, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14b" }, "created" : 12, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14c" }, "created" : 12, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14d" }, "created" : 13, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14e" }, "created" : 13, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f14f" }, "created" : 14, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f150" }, "created" : 14, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f151" }, "created" : 15, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f152" }, "created" : 15, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f153" }, "created" : 16, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f154" }, "created" : 16, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f155" }, "created" : 17, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f156" }, "created" : 17, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f157" }, "created" : 18, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f158" }, "created" : 18, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f159" }, "created" : 19, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15a" }, "created" : 19, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15b" }, "created" : 20, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15c" }, "created" : 20, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15d" }, "created" : 21, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15e" }, "created" : 21, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f15f" }, "created" : 22, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f160" }, "created" : 22, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f161" }, "created" : 23, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f162" }, "created" : 23, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f163" }, "created" : 24, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f164" }, "created" : 24, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f165" }, "created" : 25, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f166" }, "created" : 25, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f167" }, "created" : 26, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f168" }, "created" : 26, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f169" }, "created" : 27, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16a" }, "created" : 27, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16b" }, "created" : 28, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16c" }, "created" : 28, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16d" }, "created" : 29, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16e" }, "created" : 29, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f16f" }, "created" : 30, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f170" }, "created" : 30, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f171" }, "created" : 31, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f172" }, "created" : 31, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f173" }, "created" : 32, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f174" }, "created" : 32, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f175" }, "created" : 33, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f176" }, "created" : 33, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f177" }, "created" : 34, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f178" }, "created" : 34, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f179" }, "created" : 35, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17a" }, "created" : 35, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17b" }, "created" : 36, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17c" }, "created" : 36, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17d" }, "created" : 37, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17e" }, "created" : 37, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f17f" }, "created" : 38, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f180" }, "created" : 38, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f181" }, "created" : 39, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f182" }, "created" : 39, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f183" }, "created" : 40, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f184" }, "created" : 40, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f185" }, "created" : 41, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f186" }, "created" : 41, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f187" }, "created" : 42, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f188" }, "created" : 42, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f189" }, "created" : 43, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18a" }, "created" : 43, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18b" }, "created" : 44, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18c" }, "created" : 44, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18d" }, "created" : 45, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18e" }, "created" : 45, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f18f" }, "created" : 46, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f190" }, "created" : 46, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f191" }, "created" : 47, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f192" }, "created" : 47, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f193" }, "created" : 48, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f194" }, "created" : 48, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f195" }, "created" : 49, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f196" }, "created" : 49, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f197" }, "created" : 50, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f198" }, "created" : 50, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f199" }, "created" : 51, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19a" }, "created" : 51, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19b" }, "created" : 52, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19c" }, "created" : 52, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19d" }, "created" : 53, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19e" }, "created" : 53, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f19f" }, "created" : 54, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a0" }, "created" : 54, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a1" }, "created" : 55, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a2" }, "created" : 55, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a3" }, "created" : 56, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a4" }, "created" : 56, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a5" }, "created" : 57, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a6" }, "created" : 57, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a7" }, "created" : 58, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a8" }, "created" : 58, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1a9" }, "created" : 59, "trafficDirection" : "out", "packets" : 8, "agent" : "monitor_agent", "host" : "auth" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1aa" }, "created" : 59, "trafficDirection" : "out", "packets" : 0, "agent" : "monitor_agent", "host" : "attacker" }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1ab" }, "created" : 0.1, "eventType" : "streamInit", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "mainStream", "eventItr" : 0 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1ac" }, "created" : 0.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "monitor_agent -> startCollection", "eventItr" : 1 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1ad" }, "created" : 0.3, "eventType" : "event", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "ping_agent -> startPing", "eventItr" : 2 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1ae" }, "created" : 0.4, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "Wait for 20 seconds", "eventItr" : 3 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1af" }, "created" : 20.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "attack_agent -> startAttack", "eventItr" : 4 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1b0" }, "created" : 20.3, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "Wait for 20 seconds", "eventItr" : 5 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1b1" }, "created" : 40.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "defense_agent -> startDefense", "eventItr" : 6 }
+{ "_id" : { "$oid" : "548f155f47dce55db7b8f1b2" }, "created" : 40.3, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "Wait for 20 seconds", "eventItr" : 7 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b3" }, "created" : 60.2, "eventType" : "exit", "streamName" : "mainStream", "agent" : "aal", "eventLabel" : "Exit", "eventItr" : 8 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b4" }, "created" : 0.1, "eventType" : "streamInit", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "mainStream", "eventItr" : 0 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b5" }, "created" : 0.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "monitor_agent -> startCollection", "eventItr" : 1 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b6" }, "created" : 0.3, "eventType" : "event", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "ping_agent -> startPing", "eventItr" : 2 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b7" }, "created" : 0.4, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Wait for 20 seconds", "eventItr" : 3 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b8" }, "created" : 19.1, "eventType" : "triggerComplete", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Done: 20 seconds", "eventItr" : 4 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1b9" }, "created" : 19.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "attack_agent -> startAttack", "eventItr" : 5 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1ba" }, "created" : 19.3, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Wait for 20 seconds", "eventItr" : 6 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1bb" }, "created" : 39.1, "eventType" : "triggerComplete", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Done: 20 seconds", "eventItr" : 7 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1bc" }, "created" : 39.2, "eventType" : "event", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "defense_agent -> startDefense", "eventItr" : 8 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1bd" }, "created" : 39.3, "eventType" : "trigger", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Wait for 20 seconds", "eventItr" : 9 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1be" }, "created" : 59.1, "eventType" : "triggerComplete", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Done: 20 seconds", "eventItr" : 10 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1bf" }, "created" : 59.2, "eventType" : "exit", "streamName" : "mainStream", "agent" : "orchestrator", "eventLabel" : "Exit", "eventItr" : 11 }
+{ "_id" : { "$oid" : "548f156047dce55db7b8f1c0" }, "nodes" : "[\"client\", \"cache\", \"cloud\", \"auth\", \"attacker\"]", "edges" : "[[\"client\", \"cache\"], [\"cache\", \"cloud\"], [\"cloud\", \"auth\"], [\"cloud\", \"attacker\"]]", "agent" : "topo_agent" }
