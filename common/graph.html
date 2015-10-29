@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+		<script src="js-yaml.min.js"></script>
+
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.get(graphConfigFile)
+            .done(function (data) {
+            	console.log(graphConfigFile);
+            	console.log('File load complete');
+            	console.log(data);
+	            
+            	var config = jsyaml.load(data);
+	            console.log(config);
+	            
+	            parseOptions(config);
+	            
+	            chart = createGraph('container', title, xLabel, yLabel);
+	            
+	            plot();
+              
+	            //var jsonString = JSON.stringify(data);
+	            //console.log(jsonString);
+	            //console.log($.parseJSON(jsonString));
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+        	  var errorMsg = "Error reading config file: " + graphConfigFile;
+        	  errorMsg += "<br/>" + "Status: " + textStatus;
+        	  errorMsg += "<br/>" + "Error: " + errorThrown;
+        	  $('#container').html(errorMsg);
+        	  //alert(jqXHR.responseText);
+          });
+        });
+        
+        function createGraph(divId, title, xLabel, yLabel) {
+            return new Highcharts.Chart({
+                chart: {
+                    renderTo: divId, defaultSeriesType: 'spline'
+                },
+                title: {
+                    text: title, align: 'left',
+                    style: { fontSize: '12px', fontWeight: 'bold' } 
+                },
+                xAxis: {
+                    title: { text: xLabel, 
+                    	     style: { color: 'black', 
+                        	          fontSize: '12px', fontWeight:'bold' }
+                    },
+                    labels: { style: { color: 'black', 
+                        	           fontSize: '10px', fontWeight:'bold' }
+                    },
+                },
+                yAxis: {
+                    title: { text: yLabel, 
+                             style: { color: 'black', 
+                                      fontSize: '12px', fontWeight:'bold' }
+	                },
+	                labels: { style: { color: 'black', 
+	                                   fontSize: '10px', fontWeight:'bold' }
+	                },
+	            },
+                plotOptions: {
+                    series: { marker: { enabled: false } }
+                },
+                series: [{
+                    color: '#FF0000',
+                    showInLegend: false,
+                    name: '',
+                    data: []
+                }],
+                credits: { enabled: false }
+            });     
+        }
+        
+        
+        /**
+         * Request data from the server, add it to the graph and set a timeout to request again
+         */
+        function requestData() {
+            //alert("requestData");
+            $.ajax({
+                type: 'GET',
+                url: 'getGraphData.php',
+                data: "graphConfigFile=" + graphConfigFile +
+                        "&dbHost=localhost" + 
+                        "&dbPort=" + dbPort + 
+                        "&dbName=" + dbName +
+                        "&collectionName=" + collectionName +
+                        "&lastTimestamp=" + lastTimestamp + 
+                        "&recordsLimit=" + recordsLimit,
+                cache: false
+            }).done(function (records) {
+            	//alert(data);
+                setTimeout(requestData, 1000);
+                var series = chart.series[0],
+                shift = series.data.length > 1000; // shift if the series is longer than 20
+                if(records.length != 0) {
+                    for(var i=0; i < records.length; i++) {
+                        //alert(records[i]);
+                        chart.series[0].addPoint(eval(records[i]), true, shift);
+                    }
+                    lastTimestamp = records[records.length - 1][0];
+                }
+                //alert(lastTimestamp);
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+            	// Handle error here
+                console.log(jqXHR);
+                //alert(jqXHR.responseText);
+                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                $('#container').html(jqXHR.responseText);
+                //$('#editor-container').modal('show');
+            });
+        }
+        
+        </script>   
+
+	</head>
+	<body>
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 680px; height: 420px;"></div>
+	</body>
+</html>

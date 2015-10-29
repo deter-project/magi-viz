@@ -14,26 +14,34 @@
 			}
 		
 			function createSSHTunnel(host) {
-				alert(host);
-				if(host != null){
-					alert('Creating tunnel');
-					$.ajax({
-						type: 'GET',
-						url: 'tunnel.php',
-						data: "host=" + host,
-						success: function(result) {
-							alert(result);
-							if (result == "Connection failed"){
-								alert('Not able to connect to the expriment');
-							}
-						},
-						cache: false
-					});
-				}
+				//alert(host);
+				//alert('Creating tunnel');
+				$.ajax({
+					type: 'GET',
+					url: 'tunnel.php',
+					data: "host=" + host,
+					success: function(result) {
+						alert(result);
+						if (result == "Connection failed"){
+							alert('Not able to connect to the experiment');
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+			            console.log(jqXHR);
+			            alert(jqXHR.responseText);
+	                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+			        },
+					cache: false
+				});
 			}
 			
 			$(document).ready(function() {
-				createSSHTunnel(get("host"));	
+				var host = get("host");
+				if(typeof host == 'undefined'){
+			        alert('Usage: tunnel.html?host=<hostname>');
+			    }else{
+			    	createSSHTunnel(get("host"));   
+			    }
 			});
 		</script>
 		</head>

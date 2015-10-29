@@ -1,15 +1,21 @@
 <?php
+
 if(!isset($_GET['host']))
 {
 	die('Remote host not provided');
 }
 
 $host = $_GET['host'];
-$hash = base_convert(md5($host), 16, 10);
+
+if(isset($_GET['port'])){
+    $rport = $_GET['port'];
+}else{
+    $rport = 27017;
+}
+
+$hash = base_convert(md5($host.$rport), 16, 10);
 $substring = substr($hash, 0,16);
 $lport = 20000 + ($substring % 20000);
-
-$rport = 27017;
 
 $ssh_cmd = "ssh muser@users.isi.deterlab.net -L $lport:$host:$rport -f -o ExitOnForwardFailure=yes -N";
 
@@ -32,8 +38,12 @@ if($ret){
 	exec($check_cmd, $output, $ret);
 	
 	//echo print_r($output);
-	#If some other process is using up the port
+	
+	#Cannot create tunnel because either
+	#cannot connect to remote machine or
+	#some other process is using up the port
 	if(!$output){
+	    http_response_code(500);
 		die('Connection failed');
 	}
 }
