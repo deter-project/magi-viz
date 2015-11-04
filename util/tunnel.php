@@ -1,23 +1,34 @@
 <?php
 
+if(!isset($_GET['server']))
+{
+    die('Server not provided');
+}
+
 if(!isset($_GET['host']))
 {
 	die('Remote host not provided');
 }
 
-$host = $_GET['host'];
+if(!isset($_GET['port']))
+{
+    die('Remote port not provided');
+}
 
-if(isset($_GET['port'])){
-    $rport = $_GET['port'];
-}else{
-    $rport = 27017;
+$server = $_GET['server'];
+$host = $_GET['host'];
+$rport = $_GET['port'];
+
+if(isset($_GET['username']))
+{
+    $server = $_GET['username']."@".$server;
 }
 
 $hash = base_convert(md5($host.$rport), 16, 10);
 $substring = substr($hash, 0,16);
 $lport = 20000 + ($substring % 20000);
 
-$ssh_cmd = "ssh muser@users.isi.deterlab.net -L $lport:$host:$rport -f -o ExitOnForwardFailure=yes -N";
+$ssh_cmd = "ssh $server -L $lport:$host:$rport -f -o ExitOnForwardFailure=yes -N";
 
 #Output needs to redirected for the command execution 
 #to return after setting up the tunnel

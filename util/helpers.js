@@ -5,6 +5,8 @@ var lastTimestamp, recordsLimit;
 var title, xLabel, yLabel;
 var options;
 
+var sshTunnel, sshServer, sshUserName;
+
 options = decodeQueryData();
 graphConfigFile = getDefault(options, 'graphConfigFile', 'magi_graph.conf');
 
@@ -26,6 +28,13 @@ function parseOptions(config){
 	collectionName = setDefault(options, 'collectionName', 
 			getDefault(db_config, 'collectionName', 'experiment_data'));
 	
+	sshTunnel = setDefault(options, 'sshTunnel', 
+			getDefault(db_config, 'sshTunnel', true));
+	sshServer = setDefault(options, 'sshServer', 
+			getDefault(db_config, 'sshServer', 'users.isi.deterlab.net'));
+	sshUserName = setDefault(options, 'sshUserName', 
+			getDefault(db_config, 'sshUserName', 'muser'));
+	
 	lastTimestamp = setDefault(options, 'lastTimestamp', 
 			getDefault(db_config, 'lastTimestamp', -1));
 	recordsLimit = setDefault(options, 'recordsLimit', 
@@ -41,13 +50,15 @@ function parseOptions(config){
 	console.log(options);
 }
 
-function createSSHTunnel(host, port, callback) {
+function createSSHTunnel(host, port, server, username, callback) {
 	//alert('createSSHTunnel');
 	$.ajax({
 		type: 'GET',
 		url: '/magi-viz/util/tunnel.php',
 		data: "host=" + host +
-			  "&port=" + port,
+			  "&port=" + port +
+			  "&server=" + server +
+			  "&username=" + username,
 		cache: false
 	}).done(function (data, textStatus, jqXHR) {
 		//alert(result);
@@ -65,7 +76,12 @@ function createSSHTunnel(host, port, callback) {
 function plot(localDBName, recordFetchLimit) {
 	parseOptions();
 	if(dbHost != 'localhost'){
-		createSSHTunnel(dbHost, dbPort, requestData);
+		if (sshTunnel){
+			createSSHTunnel(dbHost, dbPort, sshServer, sshUserName, requestData);
+		}else{
+			requestData();
+		}
+		
 	}else{
 		//Support for legacy code
 		if(typeof localDBName != 'undefined')
