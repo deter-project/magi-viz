@@ -22,7 +22,8 @@
 	            
 	            parseOptions(config);
 	            
-	            chart = createGraph('container', title, xLabel, yLabel);
+	            chart = createGraph('container', 
+	            		type, title, xLabel, yLabel, numOfPlots);
 	            
 	            plot();
               
@@ -38,10 +39,16 @@
           });
         });
         
-        function createGraph(divId, title, xLabel, yLabel) {
+        function createGraph(divId, type, title, xLabel, yLabel, numOfPlots) {
+        	
+        	var series = [];
+        	for(var sItr=0; sItr<numOfPlots; sItr++){
+        		series.push({showInLegend: true, name: '', data: []});
+        	}
+        	
             return new Highcharts.Chart({
                 chart: {
-                    renderTo: divId, defaultSeriesType: 'spline'
+                    renderTo: divId, defaultSeriesType: type
                 },
                 title: {
                     text: title, align: 'left',
@@ -68,12 +75,7 @@
                 plotOptions: {
                     series: { marker: { enabled: false } }
                 },
-                series: [{
-                    color: '#FF0000',
-                    showInLegend: false,
-                    name: '',
-                    data: []
-                }],
+                series: series,
                 credits: { enabled: false }
             });     
         }
@@ -84,6 +86,7 @@
          */
         function requestData() {
             //alert("requestData");
+            //alert(lastTimestamp);
             $.ajax({
                 type: 'GET',
                 url: 'getGraphData.php',
@@ -96,16 +99,21 @@
                         "&recordsLimit=" + recordsLimit,
                 cache: false
             }).done(function (records) {
-            	//alert(data);
+            	//alert(records);
                 setTimeout(requestData, 1000);
-                var series = chart.series[0],
-                shift = series.data.length > 1000; // shift if the series is longer than 20
-                if(records.length != 0) {
-                    for(var i=0; i < records.length; i++) {
-                        //alert(records[i]);
-                        chart.series[0].addPoint(eval(records[i]), true, shift);
+                
+                for(var sItr=0; sItr<numOfPlots; sItr++){
+                	var series = chart.series[sItr],
+                    shift = series.data.length > 1000;
+                    sRecords = records[sItr];
+                    //alert(sRecords.length);
+                    if(sRecords.length != 0) {
+                        for(var i=0; i < sRecords.length; i++) {
+                            //alert(records[i]);
+                            series.addPoint(eval(sRecords[i]), true, shift);
+                        }
+                        lastTimestamp = sRecords[sRecords.length - 1][0];
                     }
-                    lastTimestamp = records[records.length - 1][0];
                 }
                 //alert(lastTimestamp);
             }).fail(function(jqXHR, textStatus, errorThrown) {

@@ -9,6 +9,9 @@ Importing data into local database
 
 Canned Data Visualization
 http://localhost/magi-viz/casestudy/clientserver/traffic.html
+http://localhost/magi-viz/casestudy/clientserver/traffic_common.html?dbName=magi_cs
+http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/casestudy/clientserver/graph.conf&dbName=magi_cs
 
 Real time Visualization
-http://localhost/magi-viz/casestudy/clientserver/traffic.html?host=clientnode.clientserver.montage
+http://localhost/magi-viz/casestudy/clientserver/traffic.html?dbHost=clientnode.clientserver.montage&dbPort=27018
+http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/casestudy/clientserver/graph.conf&dbHost=clientnode.clientserver.montage&dbPort=27018

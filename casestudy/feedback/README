@@ -6,7 +6,7 @@ Importing data into local database
 ../../util/populate_db.sh magi_fb experiment_data
 
 Canned Data Visualization
-http://localhost/magi-viz/casestudy/feedback/traffic.html
+http://localhost/magi-viz/casestudy/feedback/traffic.html?dbName=magi_fb
 
 Real time Visualization
-http://localhost/magi-viz/casestudy/feedback/traffic.html?host=c-0.feedbackc.montage
+http://localhost/magi-viz/casestudy/feedback/traffic.html?dbHost=c-0.feedbackc.montage&dbPort=27018

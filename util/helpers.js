@@ -2,8 +2,9 @@ var chart;
 var graphConfigFile;
 var dbHost, dbPort, dbName, collectionName;
 var lastTimestamp, recordsLimit;
-var title, xLabel, yLabel;
+var type, title, xLabel, yLabel;
 var options;
+var numOfPlots = 0;
 
 var sshTunnel, sshServer, sshUserName;
 
@@ -11,12 +12,21 @@ options = decodeQueryData();
 graphConfigFile = getDefault(options, 'graphConfigFile', 'magi_graph.conf');
 
 function parseOptions(config){
-	
+	//alert('parseOptions');
 	var graph_config, db_config;
 	
 	if(typeof config != 'undefined') {
 		graph_config = config['graph'];
     	db_config = config['db'];
+    	
+    	console.log(db_config);
+    	var filters = db_config['filter'];
+    	console.log(filters);
+    	if (!filters instanceof Array){
+    		alert("filters should be a list");
+    	}
+    	
+    	numOfPlots = filters.length;
 	}
 	
 	dbHost = setDefault(options, 'dbHost', 
@@ -31,7 +41,7 @@ function parseOptions(config){
 	sshTunnel = setDefault(options, 'sshTunnel', 
 			getDefault(db_config, 'sshTunnel', true));
 	sshServer = setDefault(options, 'sshServer', 
-			getDefault(db_config, 'sshServer', 'users.isi.deterlab.net'));
+			getDefault(db_config, 'sshServer', 'users.deterlab.net'));
 	sshUserName = setDefault(options, 'sshUserName', 
 			getDefault(db_config, 'sshUserName', 'muser'));
 	
@@ -40,6 +50,8 @@ function parseOptions(config){
 	recordsLimit = setDefault(options, 'recordsLimit', 
 			getDefault(db_config, 'recordsLimit', 0));
 	
+	type = setDefault(options, 'type', 
+			getDefault(graph_config, 'type', 'spline'));
 	title = setDefault(options, 'title', 
 			getDefault(graph_config, 'title', 'MAGI Graph'));
 	xLabel = setDefault(options, 'xLabel', 
@@ -74,7 +86,6 @@ function createSSHTunnel(host, port, server, username, callback) {
 }
 
 function plot(localDBName, recordFetchLimit) {
-	parseOptions();
 	if(dbHost != 'localhost'){
 		if (sshTunnel){
 			createSSHTunnel(dbHost, dbPort, sshServer, sshUserName, requestData);
