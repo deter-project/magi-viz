@@ -1,138 +1,139 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Traffic Plot</title>
-        
-        <script type="text/javascript" src="/magi-viz/util/jquery-1.10.1.js"></script>
-        <script type="text/javascript" src="/magi-viz/util/highcharts.js"></script>
-        <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Traffic Plot</title>
 
-    	<script>
-    		var chart; // global
-    		/**
-    		 * Request data from the server, add it to the graph and set a timeout to request again
-    		 */
-    		function requestData() {
-    			$.ajax({
-    				type: 'GET',
-    				url: 'get_traffic_data.php',
-    				data: "dbhost=localhost" + 
-                          "&dbPort=" + dbPort + 
-                          "&dbName=" + dbName +
-                          "&collectionName=" + collectionName +
-                          "&lastTimestamp=" + lastTimestamp + 
-                          "&recordsLimit=" + recordsLimit +
-    				      "&port=" + get('port'),
-    				success: function(records) {
-    					var series = chart.series[0],
-                        shift = series.data.length > 1000; // shift if the series is longer than 20
-                        
-                        if(records.length != 0){
-                            for(var i = 0; i < records.length; i++) {
-                                record = records[i];
-                                chart.series[0].addPoint([record['created'], record['bytes']], true, shift);
-                            }
-                            lastTimestamp = records[records.length - 1]['created'];
-                        }
-                        
-                        setTimeout(requestData, 250);
-    				},
-    				error: function(jqXHR, textStatus, errorThrown) {
-    					// Handle error here
-    	                console.log(jqXHR);
-    	                //alert(jqXHR.responseText);
-    	                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-    	                $('#container').html(jqXHR.responseText);
-    	                //$('#editor-container').modal('show');
-    	            },
-    				cache: false
-    			});
-    		}
-    		
-    		$(document).ready(function() {
-    			chart = new Highcharts.Chart({
-    				chart: {
-    					renderTo: 'container',
-    					defaultSeriesType: 'spline',
-    					events: {
-    					    load: function () {
-    					    	parseOptions();
-                                plot("magi_rlsca", 5);
-                            }
-    					}
-    				},
-    				title: {
-    					text: get('title'),
-    					align: 'left',
-    						style:{
-                        	fontSize: '12px',
-                        	fontWeight: 'bold'
-                    	} 
-    				},
-    				 credits: {
-                        enabled: false
-                    },
-    				xAxis: {
-    					min: 0, max: 150,
-    				    labels:{
-    						style:{
-    							color: 'black',
-    							fontSize: '10px',
-    							fontWeight:'bold'
-    						}
-    
-    					},
-    					/*title: {
-                            text: 'Time',
-                            //margin: 80
-                            style:{
-                                color: 'black',
-                                fontSize: '12px',
-                                fontWeight:'bold'
-                            }
-                        },*/
-    					tickInterval: 5
-    				},
-        		    plotOptions: {
-        		        series: {
-                            marker: {
-                                enabled: false
-                            }
-                        }
-                    },
-    				yAxis: {
-    					labels:{
-    						style:{
-    							color: 'black',
-    							fontSize: '10px',
-    							fontWeight:'bold'
-    						}
-    
-    					},
-    					min: 0, max:15,
-                    	tickInterval: 5,
-    					title: {
-    						text: 'Mbps',
-    						style:{
-    							color: 'black',
-    							fontSize: '12px',
-    							fontWeight:'bold'
-    						}
-    					}
-    				},
-    				series: [{
-    					color: '#FF0000',
-                    showInLegend: false,
-                    name: 'Traffic per sec',
-    					data: []
-    				}]
-    			});		
-    		});
-    		
-		</script>
-	</head>
-    <body>
-		<div id="container" style="width: 680px; height: 130px;"></div>
-    </body>
+<script type="text/javascript" src="/magi-viz/util/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="/magi-viz/util/highcharts.js"></script>
+<script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+
+<script>
+	var chart; // global
+	/**
+	 * Request data from the server, add it to the graph and set a timeout to request again
+	 */
+	function requestData() {
+		$
+				.ajax({
+					type : 'GET',
+					url : '../common/get_traffic_data.php',
+					data : "dbhost=localhost" + 
+                           "&dbPort=" + dbPort + 
+                           "&dbName=" + dbName + 
+                           "&collectionName=" + collectionName + 
+                           "&lastTimestamp=" + lastTimestamp + 
+                           "&recordsLimit=" + recordsLimit + 
+                           "&port=" + get('port'),
+					success : function(records) {
+						var series = chart.series[0], shift = series.data.length > 1000; // shift if the series is longer than 20
+
+						if (records.length != 0) {
+							for (var i = 0; i < records.length; i++) {
+								record = records[i];
+								chart.series[0].addPoint([ record['created'],
+										record['bytes'] ], true, shift);
+							}
+							lastTimestamp = records[records.length - 1]['created'];
+						}
+
+						setTimeout(requestData, 250);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						// Handle error here
+						console.log(jqXHR);
+						//alert(jqXHR.responseText);
+						//alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+						$('#container').html(jqXHR.responseText);
+						//$('#editor-container').modal('show');
+					},
+					cache : false
+				});
+	}
+
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			chart : {
+				renderTo : 'container',
+				defaultSeriesType : 'spline',
+				events : {
+					load : function() {
+						parseOptions();
+						plot("magi_rlsca", 5);
+					}
+				}
+			},
+			title : {
+				text : get('title'),
+				align : 'left',
+				style : {
+					fontSize : '12px',
+					fontWeight : 'bold'
+				}
+			},
+			credits : {
+				enabled : false
+			},
+			xAxis : {
+				min : 0,
+				max : 150,
+				labels : {
+					style : {
+						color : 'black',
+						fontSize : '10px',
+						fontWeight : 'bold'
+					}
+				},
+				/*title: {
+				    text: 'Time',
+				    //margin: 80
+				    style:{
+				        color: 'black',
+				        fontSize: '12px',
+				        fontWeight:'bold'
+				    }
+				},*/
+				tickInterval : 10
+			},
+			plotOptions : {
+				series : {
+					marker : {
+						enabled : false
+					}
+				}
+			},
+			yAxis : {
+				labels : {
+					style : {
+						color : 'black',
+						fontSize : '10px',
+						fontWeight : 'bold'
+					}
+
+				},
+				min : 0,
+				max : 15,
+				tickInterval : 5,
+				title : {
+					text : 'Mbps',
+					style : {
+						color : 'black',
+						fontSize : '12px',
+						fontWeight : 'bold'
+					}
+				}
+			},
+			series : [ {
+				color : '#FF0000',
+				showInLegend : false,
+				name : 'Traffic per sec',
+				data : []
+			} ]
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="container" style="width: 680px; height: 130px;"></div>
+</body>
 </html>
