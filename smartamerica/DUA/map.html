@@ -104,7 +104,7 @@ function plot_map(lat,lot,zoom,color_star,C1,C2,C3,C4,flag1)
   else if (flag1 == 1)
   {
 
-    d3.json("starrg_1.json", function(data) {
+    d3.json("data/starrg_1.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -208,7 +208,7 @@ overlay.setMap(map);
   else if (flag1 == 2)
   {
 
-    d3.json("starrg_1.json", function(data) {
+    d3.json("data/starrg_1.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -306,7 +306,7 @@ overlay.setMap(map);
       new google.maps.LatLng(36,-114.6)
     ];
 
-      d3.json("starrg_2.json", function(data) {
+      d3.json("data/starrg_2.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -387,7 +387,7 @@ overlay.setMap(map);
   }
   else if (flag1 == 3)
   {
-      d3.json("starrg_3.json", function(data) {
+      d3.json("data/starrg_3.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -485,7 +485,7 @@ overlay.setMap(map);
       new google.maps.LatLng(36,-114.6)
     ];
 
-    d3.json("starrg_4.json", function(data) {
+    d3.json("data/starrg_4.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -564,7 +564,7 @@ overlay.setMap(map);
 }
 else if(flag1 == 4)
 {
-    d3.json("starrg_5.json", function(data) {
+    d3.json("data/starrg_5.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -662,7 +662,7 @@ overlay.setMap(map);
       new google.maps.LatLng(0,0)
     ];
 
-    d3.json("starrg_6.json", function(data) {
+    d3.json("data/starrg_6.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -834,7 +834,7 @@ var cityCircle = new google.maps.Circle(populationOptions3);
 var cityCircle = new google.maps.Circle(populationOptions4);
 
 // Load the station data. When the data comes back, create an overlay.
-d3.json("area1.json", function(data) {
+d3.json("data/area1.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -879,7 +879,7 @@ d3.json("area1.json", function(data) {
   overlay.setMap(map);
 })
 
-d3.json("area2.json", function(data) {
+d3.json("data/area2.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -924,7 +924,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 })
 
-  d3.json("area3.json", function(data) {
+  d3.json("data/area3.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -969,7 +969,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 })
 
- d3.json("area4.json", function(data) {
+ d3.json("data/area4.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
@@ -1015,7 +1015,7 @@ d3.json("area2.json", function(data) {
   overlay.setMap(map);
 });
 
-d3.json("area0.json", function(data) {
+d3.json("data/area0.json", function(data) {
 
 
   var overlay = new google.maps.OverlayView();
@@ -1062,7 +1062,7 @@ d3.json("area0.json", function(data) {
   overlay.setMap(map);
 })
 
-d3.json("starrg.json", function(data) {
+d3.json("data/starrg.json", function(data) {
   //alert(data["ST1"]);
   var overlay = new google.maps.OverlayView();
 
@@ -1140,7 +1140,7 @@ overlay.setMap(map);
 });
 
 
-d3.json("bigstar.json", function(data) {
+d3.json("data/bigstar.json", function(data) {
   var overlay = new google.maps.OverlayView();
 
   // Add the container when the overlay is added to the map.
