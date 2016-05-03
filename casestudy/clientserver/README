@@ -1,7 +1,7 @@
 Exporting data from experiment
 (in case experiment data gets deleted or needs to be created in an offline mode)
 
-ssh users.isi.deterlab.net -L 28261:clientnode.clientserver.montage:27017 -f -o ExitOnForwardFailure=yes -N
+ssh users.isi.deterlab.net -L 28261:clientnode.clientserver.montage:27018 -f -o ExitOnForwardFailure=yes -N
 mongoexport --host localhost:28261 -d magi -c experiment_data --query "{'agent': 'monitor_agent'}" --out magi_cs_experiment_data.json
 
 Importing data into local database
@@ -15,3 +15,6 @@ http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/casestudy/
 Real time Visualization
 http://localhost/magi-viz/casestudy/clientserver/traffic.html?dbHost=clientnode.clientserver.montage&dbPort=27018
 http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/casestudy/clientserver/graph.conf&dbHost=clientnode.clientserver.montage&dbPort=27018
+
+Testbed other than the default (users.isi.deterlab.net)
+http://localhost/magi-viz/casestudy/clientserver/traffic.html?dbHost=clientnode.cs.SPIdev&dbPort=27018&sshServer=users.minibed.deterlab.net&sshUserName=jaipuria

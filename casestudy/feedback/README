@@ -1,5 +1,5 @@
 Exporting data from experiment
-ssh users.isi.deterlab.net -L 22331:c-0.feedbackc.montage:27017 -f -o ExitOnForwardFailure=yes -N
+ssh users.isi.deterlab.net -L 22331:c-0.feedbackc.montage:27018 -f -o ExitOnForwardFailure=yes -N
 mongoexport --host localhost:22331 -d magi -c experiment_data --query "{'agent': 'monitor_agent'}" --out magi_fb_experiment_data.json
 
 Importing data into local database
