@@ -39,6 +39,14 @@
 							}
 							//alert(lastTimestamp);
 					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						// Handle error here
+						console.log(jqXHR);
+						//alert(jqXHR.responseText);
+						//alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+						$('#container').html(jqXHR.responseText);
+						//$('#editor-container').modal('show');
+					},
 					cache: false
 				});
 			}
