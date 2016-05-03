@@ -1,0 +1,12 @@
+Exporting data from experiment
+(in case experiment data gets deleted or needs to be created in an offline mode)
+ssh users.isi.deterlab.net -L 28043:control.smcentralc.montage:27018 -f -o ExitOnForwardFailure=yes -N
+mongoexport --host localhost:28043 -d magi -c experiment_data --query "{'agent' : {'\$in':['server_agent', 'intfsensor_agent']}}" --out magi_rlscu_experiment_data.json
+
+Importing data into local database
+../../util/populate_db.sh magi_rlscu experiment_data
+
+Canned Data Visualization
+http://localhost/magi-viz/smartamerica/CUA/
+
+http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/common/rls.conf

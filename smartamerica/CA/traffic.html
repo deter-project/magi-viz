@@ -20,7 +20,7 @@
     				data: "dbhost=localhost" + 
                           "&dbPort=" + dbPort + 
                           "&dbName=" + dbName +
-                          "&collectionName=pktcounter_a" +
+                          "&collectionName=" + collectionName +
                           "&lastTimestamp=" + lastTimestamp + 
                           "&recordsLimit=" + recordsLimit +
     				      "&port=" + get('port'),
@@ -58,7 +58,7 @@
     					events: {
     					    load: function () {
     					    	parseOptions();
-                                plot("magi", 5);
+                                plot("magi_rlsca", 5);
                             }
     					}
     				},
@@ -74,7 +74,7 @@
                         enabled: false
                     },
     				xAxis: {
-    					min: 0, max: 120,
+    					min: 0, max: 150,
     				    labels:{
     						style:{
     							color: 'black',

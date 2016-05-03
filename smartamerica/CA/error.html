@@ -21,7 +21,7 @@
 				data: "dbhost=localhost" + 
                 "&dbPort=" + dbPort + 
                 "&dbName=" + dbName +
-                "&collectionName=rlserrors_a" +
+                "&collectionName=" + collectionName +
                 "&lastTimestamp=" + lastTimestamp + 
                 "&recordsLimit=" + recordsLimit,
 				success: function(records) {
@@ -57,7 +57,7 @@
 					events: {
 						load: function () {
 							parseOptions();
-                            plot("magi", 500);
+                            plot("magi_rlsca", 500);
                         }
 					}
 				},
@@ -80,7 +80,7 @@
 							fontWeight:'bold'
 						}
 				    },
-                	min: 0, max: 120,
+                	min: 0, max: 150,
 					labels:{
 						style:{
 							color: 'black',

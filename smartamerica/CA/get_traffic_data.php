@@ -10,7 +10,9 @@
         $collection = getCollection($dbHost, $dbPort, $dbName, $collectionName);
         
         //Get the first time stamp
-        $filter = array("port" => $port);
+        $filter = array("agent" => "intfsensor_agent",
+                        "peerNode" => $port,
+                        "trafficDirection" => "out");
         $tsFirstRecord = getFirstRecordTimestamp($collection, $filter);
         
         //Calculate the absolute time stamp

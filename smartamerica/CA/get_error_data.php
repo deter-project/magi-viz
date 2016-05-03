@@ -7,7 +7,7 @@
         $collection = getCollection($dbHost, $dbPort, $dbName, $collectionName);
         
         //Get the first time stamp
-        $filter = array();
+        $filter = array("agent" => "server_agent");
         $tsFirstRecord = getFirstRecordTimestamp($collection, $filter);
         
         //echo $tsFirstRecord;
