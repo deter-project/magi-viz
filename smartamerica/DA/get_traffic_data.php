@@ -32,9 +32,11 @@
         
         echo json_encode($formatted_result);
         
-    } catch (MongoConnectionException $e) {
-        die('Error connecting to MongoDB server');
-    } catch (MongoException $e) {
+    }catch (MongoConnectionException $e) {
+        http_response_code(500);
+        die("Error connecting to MongoDB server: ". $dbHost . ":" . $dbPort);
+    }catch (Exception $e) {
+        http_response_code(500);
         die('Error: ' . $e->getMessage());
     }
 ?>
