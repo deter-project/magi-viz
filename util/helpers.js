@@ -4,11 +4,13 @@ var dbHost, dbPort, dbName, collectionName;
 var lastTimestamp, recordsLimit;
 var type, title, xLabel, yLabel;
 var options;
-var numOfPlots = 0;
+var numOfPlots = 0; 
+var seriesnames = [ ];
 
 var sshTunnel, sshServer, sshUserName;
 
 options = decodeQueryData();
+console.log(options); 
 graphConfigFile = getDefault(options, 'graphConfigFile', 'magi_graph.conf');
 
 function parseOptions(config){
@@ -20,15 +22,24 @@ function parseOptions(config){
     	db_config = config['db'];
     	
     	console.log(db_config);
-    	var filters = db_config['filter'];
-    	console.log(filters);
-    	if (!filters instanceof Array){
-    		alert("filters should be a list");
+    	var plots = db_config['plots'];
+    	console.log(plots);
+    	if (!plots instanceof Array){
+    		alert("plots should be a list");
     	}
     	
-    	numOfPlots = filters.length;
+    	numOfPlots = plots.length;
+	console.log(numOfPlots);
+
 	}
-	
+
+	//console.log(plots[0].series);
+
+        for(var i=0; i < numOfPlots; i++) {
+		seriesnames[i] = plots[i].series; 
+		//console.log(seriesnames[i]);
+	}
+     		
 	dbHost = setDefault(options, 'dbHost', 
 			getDefault(db_config, 'dbHost', 'localhost'));
 	dbPort = setDefault(options, 'dbPort', 
@@ -131,6 +142,7 @@ function decodeQueryData(uri){
 		uri = location.search.substring(1);
 	var data = uri?JSON.parse('{"' + uri.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
                  function(key, value) { return key===""?value:decodeURIComponent(value) }):{}
+    console.log(data);
     return data;
 }
           

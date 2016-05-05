@@ -23,7 +23,7 @@
 	            parseOptions(config);
 	            
 	            chart = createGraph('container', 
-	            		type, title, xLabel, yLabel, numOfPlots);
+	            		type, title, xLabel, yLabel, numOfPlots, seriesnames);
 	            
 	            plot();
               
@@ -39,11 +39,11 @@
           });
         });
         
-        function createGraph(divId, type, title, xLabel, yLabel, numOfPlots) {
+        function createGraph(divId, type, title, xLabel, yLabel, numOfPlots, seriesnames) {
         	
         	var series = [];
         	for(var sItr=0; sItr<numOfPlots; sItr++){
-        		series.push({showInLegend: true, name: '', data: []});
+        		series.push({showInLegend: true, name: seriesnames[sItr], data: []});
         	}
         	
             return new Highcharts.Chart({

@@ -12,9 +12,12 @@
 	try
 	{
 		header("Content-type: application/json");
-		
+
+		//echo $graphConfigFile; 
+
 		try{
             $config = yaml_parse_file($graphConfigFile);
+	    
             //print_r($config);
         } catch(Exception $e) {
             throw new Exception('Error parsing config file: '.$e->getMessage());
@@ -34,24 +37,25 @@
             throw new Exception('Invalid DB Config: '.$db_config);
         }
 		
-		if (array_key_exists('filter', $db_config)) {
-		    $filters = $db_config['filter'];
-		    if (!is_array($filters)) {
-		        throw new Exception('filters should be a list');
+		if (array_key_exists('plots', $db_config)) {
+		    $plots = $db_config['plots'];
+		    if (!is_array($plots)) {
+		        throw new Exception('plots should be a list');
 		    }
 		} else {
-		    throw new Exception('filters not provided');
+		    throw new Exception('plots not provided');
 		}
 		
 		//print_r(sizeof($filters));
 		
 		$resultAllPlots = array();
 		
-		foreach ($filters as $filter) {
-		    if (!is_array($filter)) {
-		        $filter = array();
+		foreach ($plots as $plot) {
+		    if (!is_array($plot)) {
+		        $plot = array();
 		    }
-		    
+
+		    $filter = $plot['filter'];
 		    $filter['agent'] = $db_config['agent'];
 		    //print_r($filter);
 		    
@@ -91,10 +95,10 @@
 	    echo json_encode($resultAllPlots);
 	    
 	}catch (MongoConnectionException $e) {
-	    http_response_code(500);
+	    //http_response_code(500);
 		die("Error connecting to MongoDB server: ". $dbHost . ":" . $dbPort);
 	}catch (Exception $e) {
-	    http_response_code(500);
+	   // http_response_code(500);
 	 	die('Error: ' . $e->getMessage());
 	}
 	
