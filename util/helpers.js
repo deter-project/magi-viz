@@ -22,7 +22,12 @@ function parseOptions(config){
     	db_config = config['db'];
     	
     	console.log(db_config);
+
     	var plots = db_config['plots'];
+	if (typeof plots == 'undefined') {
+		alert("Graph config file incorrect. Missing key called plots");
+	}
+
     	console.log(plots);
     	if (!plots instanceof Array){
     		alert("plots should be a list");
