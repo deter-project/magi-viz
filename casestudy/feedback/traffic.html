@@ -47,22 +47,22 @@
 						 			total[created] = record['bytes'];
 						 		}
 							}
+						 	
+						 	for(key in noise){
+						 		noise_series = chart.series[0];
+						 		noise_series.addPoint([parseInt(key), noise[key]]);
+						 	}
+						 	
+						 	for(key in control){
+						 		chart.series[1].addPoint([parseInt(key), control[key]]);
+						 	}
+						 	
+						 	for(key in total){
+						 		chart.series[2].addPoint([parseInt(key), total[key]]);
+						 	}
+						 	
+						 	lastTimestamp = records[records.length - 1]['created'];
 						}
-						
-						for(key in noise){
-							noise_series = chart.series[0]; 
-							noise_series.addPoint([parseInt(key), noise[key]]);
-						}
-						
-						for(key in control){
-							chart.series[1].addPoint([parseInt(key), control[key]]);
-						}
-						
-						for(key in total){
-							chart.series[2].addPoint([parseInt(key), total[key]]);
-						}
-						
-						lastTimestamp = records[records.length - 1]['created'];
 						//alert(lastTimestamp);
 					},
 					cache: false

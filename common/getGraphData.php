@@ -69,7 +69,10 @@
             $lastTimestamp = $tsFirstRecord + (float)$relativeLastTimeStamp;
             //print_r($lastTimestamp);
             
+            $yColumn = $db_config['yValue'];
+            
             $filter["created"] = array('$gt' => $lastTimestamp);
+            $filter[$yColumn] = array('$exists' => true);
             //print_r($filter);
             
             $cursor = $collection->find($filter)->sort(array("created" => 1))->limit($recordsLimit);
@@ -78,8 +81,6 @@
     
             //Array for JSON data
             $formatted_result = array();
-        
-            $yColumn = $db_config['yValue'];
         
             foreach ( $cursor as $id => $value ) {
                 $relativeCreatedTime = round(($value["created"] - $tsFirstRecord), 8);

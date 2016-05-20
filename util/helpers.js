@@ -57,7 +57,7 @@ function parseOptions(config){
 	sshTunnel = setDefault(options, 'sshTunnel', 
 			getDefault(db_config, 'sshTunnel', true));
 	sshServer = setDefault(options, 'sshServer', 
-			getDefault(db_config, 'sshServer', 'users.deterlab.net'));
+			getDefault(db_config, 'sshServer', 'users.isi.deterlab.net'));
 	sshUserName = setDefault(options, 'sshUserName', 
 			getDefault(db_config, 'sshUserName', 'muser'));
 	
