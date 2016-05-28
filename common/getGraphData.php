@@ -54,9 +54,12 @@
 		    if (!is_array($plot)) {
 		        $plot = array();
 		    }
+		    
+		    $yColumn = $db_config['yValue'];
 
 		    $filter = $plot['filter'];
 		    $filter['agent'] = $db_config['agent'];
+		    $filter[$yColumn] = array('$exists' => true);
 		    //print_r($filter);
 		    
             $collection = getCollection($dbHost, $dbPort, $dbName, $collectionName);
@@ -69,10 +72,8 @@
             $lastTimestamp = $tsFirstRecord + (float)$relativeLastTimeStamp;
             //print_r($lastTimestamp);
             
-            $yColumn = $db_config['yValue'];
-            
             $filter["created"] = array('$gt' => $lastTimestamp);
-            $filter[$yColumn] = array('$exists' => true);
+            
             //print_r($filter);
             
             $cursor = $collection->find($filter)->sort(array("created" => 1))->limit($recordsLimit);

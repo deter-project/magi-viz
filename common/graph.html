@@ -1,12 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
-        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
-        <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
-		<script src="js-yaml.min.js"></script>
+	
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	    
+	    <script type="text/javascript" src="/magi-viz/util/jquery-1.10.1.js"></script>
+	    <script type="text/javascript" src="/magi-viz/util/highcharts.js"></script>
+	    <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+	    <script type="text/javascript" src="/magi-viz/util/js-yaml.min.js"></script>
 
         <script type="text/javascript">
 
@@ -14,10 +15,18 @@
             $.get(graphConfigFile)
             .done(function (data) {
             	console.log(graphConfigFile);
-            	console.log('File load complete');
+            	console.log('Config file load complete');
             	console.log(data);
 	            
-            	var config = jsyaml.load(data);
+            	var config;
+            	try{
+            		config = jsyaml.load(data);
+            	} catch (err){
+            		var errorMsg = "Error parsing config file: " + err.message;
+            		$('#container').html(errorMsg);
+            		return;
+            	}
+            	
 	            console.log(config);
 	            
 	            parseOptions(config);
@@ -130,7 +139,6 @@
 
 	</head>
 	<body>
-		<!-- 3. Add the container -->
-		<div id="container" style="width: 680px; height: 420px;"></div>
+		<div id="container" style="width:100%;height:100%;"></div>
 	</body>
 </html>
