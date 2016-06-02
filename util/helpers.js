@@ -64,7 +64,7 @@ function parseOptions(config){
 	lastTimestamp = setDefault(options, 'lastTimestamp', 
 			getDefault(db_config, 'lastTimestamp', -1));
 	recordsLimit = setDefault(options, 'recordsLimit', 
-			getDefault(db_config, 'recordsLimit', 0));
+			getDefault(db_config, 'recordsLimit', undefined));
 	
 	type = setDefault(options, 'type', 
 			getDefault(graph_config, 'type', 'spline'));
