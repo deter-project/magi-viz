@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+
+<head>
+
+<body style="width:500px;height:750px">
+
+	<div id="main">
+	    <div id="data"></div>
+	    <div id="chart" style='text-align:center;
+	    background-image:url(IEEE118BusSystem3.png);
+	    background-size:contain;background-repeat:no-repeat;
+	    width:500px;height:700px;' align="center"></div>
+	</div>
+	
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="/magi-viz/util/jquery-1.10.1.js"></script>
+    <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+	
+	<script>
+	
+	var width = 500,
+	    height = 700;
+	
+	initializeTopoGraph()
+	
+	function initializeTopoGraph(){
+		$.ajax({
+			type: 'GET',
+			url: 'getDmmTopo.php',
+			data: "",
+			success: function(records) {
+				//alert(records)
+				var nodes = records['nodes']
+				var links = records['links']
+				
+				links.forEach(function(link) {
+				  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+				  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+				});
+	
+				setupGraph(nodes, links)
+			},
+		});
+	}
+	
+	var disruption, deception, inactiveGens;
+	
+	function requestData(){
+		//alert("requestData");
+        //alert(dbName);
+		setTimeout(requestData, 1030);
+        $.ajax({
+            type: 'GET',
+            url: 'getDmmData.php',
+            data: "dbhost=localhost" + 
+                  "&dbPort=" + dbPort + 
+                  "&dbName=" + dbName +
+                  "&lastTimestamp=" + lastTimestamp + 
+                  "&recordsLimit=" + recordsLimit,
+            success: function(records) {
+            	//console.log(records);
+            	//alert(Object.keys(records).length);
+            	
+                if(Object.keys(records).length != 0){
+                	var nodes = records['nodes']
+                    var links = records['links']
+                    
+                    node.each(function(d){
+                        //d.name = "G-" + d.name;
+                        d.commanded = nodes[d.itr]['commanded'];
+                        d.actual = nodes[d.itr]['actual'];
+                        d.active = nodes[d.itr]['active'];
+                    })
+                    
+                    link.each(function(d){
+                        d.lastResponse = links[d.itr]['lastResponse'];
+                        d.deception = links[d.itr]['deception'];
+                    })
+                    
+                    lastTimestamp = records['created'];
+                	
+                	disruption = {};
+                    deception = {};
+                    inactiveGens = [];
+                    
+                    var len = Object.keys(links).length;
+                    for (var itr=1; itr<=len; itr++) {
+                    	if (!nodes[itr]['active']) {
+                    		inactiveGens.push(itr);
+                    	} else {
+                    		l = links[itr];
+                            if (l['lastResponse'] != 0){
+                                disruption[itr] = l['lastResponse'];
+                            }
+                            if (l['deception'] != 0){
+                                deception[itr] = l['deception'];
+                            }
+                    	}
+                    }
+                    
+                    console.log("k=" + lastTimestamp);
+                    //console.log("inactive: " + JSON.stringify(inactiveGens));
+                    //console.log("distruption: " + JSON.stringify(disruption));
+                    //console.log("deception: " + JSON.stringify(deception));
+                    
+                    refreshPlot();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle error here
+                console.log(jqXHR);
+                //alert(jqXHR.responseText);
+                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                $('#chart').html(jqXHR.responseText);
+                //$('#editor-container').modal('show');
+            },
+            cache: false
+        });
+    }
+	
+	var node, link, data, notice;
+	
+	//var color_node = d3.scale.category20();
+	function color_node(status) {
+		if (status)
+			return "#0000ff";
+		else
+			return "#d62728";
+	}
+
+	var color_link = d3.scale.linear()
+	.domain([1, 10])
+	.range(["#00FF00", "#FF0000"]);
+	
+	function setupGraph(nodes, links){
+		
+		var force = d3.layout.force()
+	    .charge(-500)
+	    .size([width, height])
+	    .nodes(d3.values(nodes))
+		.links(links);
+		  
+		force.linkDistance(width/2 - 100);
+		
+		var chart_svg = d3.select("#chart").append("svg")
+	    .attr("width", width)
+	    .attr("height", height);
+		
+		notice = chart_svg.append("text")
+		.attr("fill", "#CC0000")
+		.attr("text-anchor", "middle")
+		//.attr("font-weight", "bold")
+        .attr("x", 200)
+        .attr("y", 35)
+        .text("");
+		
+		link = chart_svg.selectAll(".link")
+		    .data(force.links())
+		  .enter().append("line")
+		    .attr("class", "link")
+		    .style("stroke-width", function(d) { return Math.sqrt(2); });
+	      
+	  	node = chart_svg.selectAll(".node")
+		    .data(nodes)
+		  .enter().append("g")
+		    .attr("class", "node")
+		    .on("mouseover", mouseover)
+		    .on("mouseout", mouseout)
+		    .call(force.drag);
+	      
+	  	node.style("fill", function(d) { return color_node(d.active); });
+	  	
+	  	//node.attr("transform", "translate(" + width/2 + "," + height/2 + ")")
+	  	node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	  	
+		node.append("circle")
+		    .attr("r", 5);
+			    
+		var data_svg = d3.select("#data").append("svg")
+        .attr("width", width)
+        .attr("height", 50);
+		
+		data = data_svg.append("text")
+		.attr("text-anchor", "middle")
+		.attr("alignment-baseline", "middle")
+		.attr("x", width/2)
+		.attr("y", 50/2)
+		.text("Loading ISO - Generators Communication Plot");
+		
+	    //force.on("end", loadPlot);
+	    //force.start();
+	    
+	    loadPlot();
+	    
+	    function loadPlot() {
+	        link
+	            .attr("x1", function(d) { return d.source.x; })
+	            .attr("y1", function(d) { return d.source.y; })
+	            .attr("x2", function(d) { return d.target.x; })
+	            .attr("y2", function(d) { return d.target.y; })
+	            .style("stroke-dasharray", ("3, 2"))
+	            .style("stroke", function(d) {
+	            	return color_link(Math.max(d.lastResponse, 5*d.deception)); 
+	            	});
+	        
+	        node
+	            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+	            .append("text")
+	            .attr("x", -10)
+	            .attr("dy", "-.40em")
+	            .text(function(d) { return d.name; });
+	            
+	        //alert("Loading Done");
+	        console.log(node);
+	        console.log(link);
+	        
+	        /* node.each(function(d){
+	        	console.log(d.name + " : " + d.x + " , " + d.y);
+	        }) */
+	        
+	        data.text("ISO - Generators Communication")
+	        
+	        parseOptions();
+	        
+	        var localDBName = getDefault(decodeQueryData(), 'dbName', 'magi_dmma');
+	        //alert(localDBName);
+	        
+	        setTimeout(function() {
+	        	plot(localDBName);
+			}, 1000)
+	    }
+	}
+	
+	function refreshPlot() {
+        link
+            .style("stroke", function(d) {
+                return color_link(Math.max(d.lastResponse, 5*d.deception)); })
+            .style("stroke-width", function(d) { 
+            	var width = Math.max(d.lastResponse/2, 2*d.deception);
+            	width = Math.max(1, width);
+            	width = Math.min(5, width);
+            	return width; });
+        node
+            .style("fill", function(d) { return color_node(d.active); })
+            .select("text")
+            .text(function(d) { return d.name; });
+            
+        var msg = "";
+        if (inactiveGens.length) {
+        	msg += "Inactive: " + JSON.stringify(inactiveGens);
+        }
+        if (Object.keys(disruption).length) {
+        	msg += " Disruption: " + JSON.stringify(disruption);
+        }
+        if (Object.keys(deception).length) {
+            msg += " Deception: " + JSON.stringify(deception);
+        }
+        
+        //console.log(msg);
+        notice.text(msg);
+        
+        //alert("Refresh Done");
+        //console.log(node);
+        //console.log(link);
+    }
+	
+	function mouseover() {
+	  d3.select(this).select("circle").transition()
+	      .duration(200)
+	      .attr("r", 6);
+	      
+	  /* d3.select(this).select('text')
+	                .text(function(d){
+	                    return d.name;
+	                }); */
+	  
+	  d3.select(this).each(function(d){
+		  if (d.name == "ISO")
+			  return;
+          data.text("Generator " + d.name + 
+        		  " | Commanded: " + d.commanded + " Mhz" +
+        		  " | Actual: " + d.actual + " MHz");
+      });
+	  
+	  //console.log(d3.select(this));
+	}
+	
+	function mouseout() {
+	  d3.select(this).select("circle").transition()
+	      .duration(200)
+	      .attr("r", 5);
+	      
+	  /* d3.select(this).select('text')
+	      .text(function(d){
+	      	  return d.name;
+	      }) */
+	      
+	  data.text("ISO - Generators Communication")
+	}
+	
+	</script>
+
+</body>
+
+</head>
+</html>

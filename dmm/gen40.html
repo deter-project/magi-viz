@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	    
+	    <script type="text/javascript" src="/magi-viz/util/jquery-1.10.1.js"></script>
+        <script type="text/javascript" src="/magi-viz/util/highcharts.js"></script>
+        <script type="text/javascript" src="/magi-viz/util/helpers.js"></script>
+        <script type="text/javascript" src="/magi-viz/util/js-yaml.min.js"></script>
+
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.get(graphConfigFile)
+            .done(function (data) {
+            	console.log(graphConfigFile);
+            	console.log('Config file load complete');
+            	console.log(data);
+	            
+            	var config;
+            	try{
+            		config = jsyaml.load(data);
+            	} catch (err){
+            		var errorMsg = "Error parsing config file: " + err.message;
+            		$('#container').html(errorMsg);
+            		return;
+            	}
+            	
+	            console.log(config);
+	            
+	            parseOptions(config);
+	            
+	            chart = createGraph('container', 
+	            		type, title, xLabel, yLabel, numOfPlots, seriesnames);
+	            
+	            plot(dbName, recordsLimit);
+              
+	            //var jsonString = JSON.stringify(data);
+	            //console.log(jsonString);
+	            //console.log($.parseJSON(jsonString));
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+        	  var errorMsg = "Error reading config file: " + graphConfigFile;
+        	  errorMsg += "<br/>" + "Status: " + textStatus;
+        	  errorMsg += "<br/>" + "Error: " + errorThrown;
+        	  $('#container').html(errorMsg);
+        	  //alert(jqXHR.responseText);
+          });
+        });
+        
+        function createGraph(divId, type, title, xLabel, yLabel, numOfPlots, seriesnames) {
+        	
+        	var series = [];
+        	for(var sItr=0; sItr<numOfPlots; sItr++){
+        		series.push({showInLegend: true, name: seriesnames[sItr], data: []});
+        	}
+        	
+            return new Highcharts.Chart({
+                chart: {
+                    renderTo: divId, defaultSeriesType: type
+                },
+                title: {
+                    text: title, align: 'left',
+                    style: { fontSize: '12px', fontWeight: 'bold' } 
+                },
+                xAxis: {
+                    title: { text: xLabel, 
+                    	     style: { color: 'black', 
+                        	          fontSize: '12px', fontWeight:'bold' }
+                    },
+                    labels: { style: { color: 'black', 
+                        	           fontSize: '10px', fontWeight:'bold' }
+                    },
+                },
+                yAxis: {
+                    title: { text: yLabel, 
+                             style: { color: 'black', 
+                                      fontSize: '12px', fontWeight:'bold' }
+	                },
+	                labels: { style: { color: 'black', 
+	                                   fontSize: '10px', fontWeight:'bold' }
+	                },
+	            },
+                plotOptions: {
+                    series: { marker: { enabled: false } }
+                },
+                series: series,
+                credits: { enabled: false }
+            });     
+        }
+        
+        
+        /**
+         * Request data from the server, add it to the graph and set a timeout to request again
+         */
+        function requestData() {
+            //alert("requestData");
+            //alert(lastTimestamp);
+            $.ajax({
+                type: 'GET',
+                url: '/magi-viz/common/getGraphData.php',
+                data: "graphConfigFile=" + graphConfigFile +
+                        "&dbHost=" + dbHost + 
+                        "&dbPort=" + dbPort + 
+                        "&dbName=" + dbName +
+                        "&collectionName=" + collectionName +
+                        "&lastTimestamp=" + lastTimestamp + 
+                        "&recordsLimit=" + recordsLimit,
+                cache: false
+            }).done(function (records) {
+            	//alert(records);
+                setTimeout(requestData, 1000);
+                
+                for(var sItr=0; sItr<numOfPlots; sItr++){
+                	var series = chart.series[sItr],
+                    shift = series.data.length > 1000;
+                    sRecords = records[sItr];
+                    //alert(sRecords.length);
+                    if(sRecords.length != 0) {
+                        for(var i=0; i < sRecords.length; i++) {
+                            //alert(sRecords[i]);
+                            record = [sRecords[i][0], sRecords[i][1][39]];
+                            //alert(record);
+                            series.addPoint(eval(record), true, shift);
+                        }
+                        lastTimestamp = sRecords[sRecords.length - 1][0];
+                    }
+                }
+                //alert(lastTimestamp);
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+            	// Handle error here
+                console.log(jqXHR);
+                //alert(jqXHR.responseText);
+                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                $('#container').html(jqXHR.responseText);
+                //$('#editor-container').modal('show');
+            });
+        }
+        
+        </script>   
+
+	</head>
+	<body>
+		<div id="container" style="width:100%;height:100%;"></div>
+	</body>
+</html>

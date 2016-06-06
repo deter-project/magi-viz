@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript">
+function autoResize(id) { 
+	var newheight; var newwidth;
+	if(document.getElementById){
+	    newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+	    newwidth=document.getElementById(id).contentWindow.document.body.scrollWidth;
+	}
+	document.getElementById(id).contentWindow.document.body.style.height= (newheight-20) + "px";
+	document.getElementById(id).contentWindow.document.body.style.width= (newwidth-20) + "px"; 
+}
+</script>
+
+</head>
+
+<title>DMM</title>
+
+<body>
+
+<table>
+<tr>
+
+<th>
+<iframe class="topo" src="dmm_topo.html?dbName=magi_dmmdecp" 
+id="topo" width="520" height="770" onload='autoResize("topo");' style="border:0;"></iframe></th>
+<th>
+
+<table>
+<tr>
+    <th>
+    <iframe class="graph" 
+    src="/magi-viz/common/graph.html?graphConfigFile=/magi-viz/dmm/config/mg_frequency.conf&dbName=magi_dmmdecp" 
+    id="freq" width="420" height="320" onload='autoResize("freq");' style="border:0;"></iframe>
+    </th>
+    <th>
+    <iframe class="graph" 
+    src="/magi-viz/common/graph.html?graphConfigFile=/magi-viz/dmm/config/mg_deception.conf" 
+    id="traf" width="420" height="320" onload='autoResize("traf");' style="border:0;"></iframe>
+    </th>
+</tr>
+
+<tr>
+    <th>
+    <iframe class="graph" 
+    src="/magi-viz/dmm/gen40.html?graphConfigFile=/magi-viz/dmm/config/mg_pg40.conf" 
+    id="pg" width="420" height="320" onload='autoResize("pg");' style="border:0;"></iframe>
+    </th>
+    <th>
+    <iframe class="graph" 
+    src="/magi-viz/common/graph.html?graphConfigFile=/magi-viz/dmm/config/mg_avgprice.conf&dbName=magi_dmmdecp" 
+    id="appu" width="420" height="320" onload='autoResize("appu");' style="border:0;"></iframe>
+    </th>
+</tr>
+</table>
+
+</th>
+</tr>
+</table>
+
+</body>
+</html>

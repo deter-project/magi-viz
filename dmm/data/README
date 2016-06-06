@@ -1,0 +1,25 @@
+Exporting data from experiment
+
+ssh users.isi.deterlab.net -L 28626:control.dmmcont.montage:27018 -f -o ExitOnForwardFailure=yes -N
+mongoexport --host localhost:28626 -d magi -c experiment_data --out magi_dmm_experiment_data.json
+
+Importing data into local database
+../../util/populate_db.sh magi_dmm experiment_data
+
+
+Attack
+mongoexport --host localhost:28626 -d magi -c experiment_data --out magi_dmma_experiment_data.json
+../../util/populate_db.sh magi_dmma experiment_data
+
+Attack with resolution
+mongoexport --host localhost:28626 -d magi -c experiment_data --out magi_dmmar_experiment_data.json
+../../util/populate_db.sh magi_dmmar experiment_data
+
+Deception
+mongoexport --host localhost:28626 -d magi -c experiment_data --out magi_dmmdecp_experiment_data.json
+../../util/populate_db.sh magi_dmmdecp experiment_data
+
+Canned Data Visualization
+http://localhost/magi-viz/dmm/disruption.html
+http://localhost/magi-viz/dmm/deception.html
+
