@@ -52,7 +52,11 @@
         	
         	var series = [];
         	for(var sItr=0; sItr<numOfPlots; sItr++){
-        		series.push({showInLegend: true, name: seriesnames[sItr], data: []});
+        		series.push({
+        			showInLegend: true, data: [], 
+        			name: seriesnames[sItr], 
+        			color: '#'+(Math.random().toString(16)+'0000000').slice(2, 8) //random color
+        		});
         	}
         	
             return new Highcharts.Chart({
