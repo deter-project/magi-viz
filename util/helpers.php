@@ -2,17 +2,17 @@
 	
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	
-	$dbHost = getDefault('dbHost', 'localhost');
-    $dbPort = getDefault('dbPort', '27017');
-    $dbName = getDefault('dbName', 'magi');
-    $collectionName = getDefault('collectionName', 'experiment_data');
-    $graphConfigFile = getDefault('graphConfigFile', 'magi_graph.conf');
+	$dbHost = get('dbHost', 'localhost');
+    $dbPort = get('dbPort', '27017');
+    $dbName = get('dbName', 'magi');
+    $collectionName = get('collectionName', 'experiment_data');
+    $graphConfigFile = get('graphConfigFile', 'magi_graph.conf');
     if (startsWith($graphConfigFile, "/")) {
         $graphConfigFile = $root.$graphConfigFile;
     }
 	
-	$relativeLastTimeStamp = getDefault('lastTimestamp', -1);
-    $recordsLimit = getDefault('recordsLimit', 0);
+	$relativeLastTimeStamp = get('lastTimestamp', -1);
+    $recordsLimit = get('recordsLimit', 0);
     
 	function getCollection($dbHost, $dbPort, $dbName, $collectionName){
 		$conn = new MongoClient( "mongodb://" . $dbHost . ":" . $dbPort);
@@ -32,15 +32,13 @@
 		return $tsFirstRecord;
 	}
 	
-	function getDefault($name, $defaultValue) {
-	    if(isset($_GET[$name])) {
-	        $val = $_GET[$name];
-	        if ($val != 'undefined') {
-	            return $_GET[$name];
-	        }
-        }
-        return $defaultValue;
+	function get($name, $defaultValue) {
+        return getDefault($_GET[$name], $defaultValue);
 	}
+	
+	function getDefault(&$var, $default=null) {
+        return isset($var) ? $var : $default;
+    }
 	
 	function startsWith($haystack, $needle) {
         // search backwards starting from haystack length characters from the end
