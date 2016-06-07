@@ -4,9 +4,10 @@ ssh users.isi.deterlab.net -L 28043:control.smcentralc.montage:27018 -f -o ExitO
 mongoexport --host localhost:28043 -d magi -c experiment_data --query "{'agent' : {'\$in':['server_agent', 'intfsensor_agent']}}" --out magi_rlsca_experiment_data.json
 
 Importing data into local database
-../../util/populate_db.sh magi_rlsca experiment_data
+../../../util/populate_db.sh magi_rlsca experiment_data
 
 Canned Data Visualization
 http://localhost/magi-viz/smartamerica/CA/
 
-http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/common/rls.conf
+http://localhost/magi-viz/common/graph.html?graphConfigFile=/magi-viz/smartamerica/common/rls.conf
+

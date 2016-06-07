@@ -4,7 +4,7 @@ ssh users.isi.deterlab.net -L 35589:control.smdist.montage:27018 -f -o ExitOnFor
 mongoexport --host localhost:35589 -d magi -c experiment_data --query "{'agent' : {'\$in':['server_agent', 'intfsensor_agent']}}" --out magi_rlsdu_experiment_data.json
 
 Importing data into local database
-../../util/populate_db.sh magi_rlsdu experiment_data
+../../../util/populate_db.sh magi_rlsdu experiment_data
 
 Canned Data Visualization
 http://localhost/magi-viz/smartamerica/DUA/

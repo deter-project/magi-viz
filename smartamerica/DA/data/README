@@ -1,0 +1,10 @@
+Exporting data from experiment
+ssh users.isi.deterlab.net -L 35589:control.smdist.montage:27018 -f -o ExitOnForwardFailure=yes -N
+mongoexport --host localhost:35589 -d magi -c experiment_data --query "{'agent' : {'\$in':['server_agent', 'intfsensor_agent']}}" --out magi_rlsda_experiment_data.json
+
+Importing data into local database
+../../../util/populate_db.sh magi_rlsda experiment_data
+
+Canned Data Visualization
+http://localhost/magi-viz/smartamerica/DA/
+
