@@ -36,8 +36,11 @@
 										record['error'] ], true, shift);
 							}
 							lastTimestamp = records[records.length - 1]['created'];
+						} else {
+							lastTimestamp = lastTimestamp + 5;
 						}
-						setTimeout(requestData, 250);
+						
+						setTimeout(requestData, 120);
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 						// Handle error here
@@ -175,21 +178,21 @@
 					fontSize : '14px',
 					fontWeight : 'bold'
 				}).add();
-			}, 6500);
+			}, 4000);
 
 			setTimeout(function() {
 				title = chart.renderer.text("Server 4 up", 650, 90).css({
 					fontSize : '14px',
 					fontWeight : 'bold'
 				}).add();
-			}, 11000);
+			}, 6500);
 
 			setTimeout(function() {
 				title = chart.renderer.text("Server 5 up", 920, 90).css({
 					fontSize : '14px',
 					fontWeight : 'bold'
 				}).add();
-			}, 16000);
+			}, 10000);
 
 		});
 	});
