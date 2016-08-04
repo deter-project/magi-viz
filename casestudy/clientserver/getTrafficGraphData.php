@@ -37,7 +37,7 @@
 	    echo json_encode($formatted_result);
 	    
 	}catch (MongoConnectionException $e) {
-		die("Error connecting to MongoDB server: ". $dbHost . ":" . $dbPort);
+		die("Error connecting to MongoDB server: ". $dbHost . ":" . $dbPort . ". " . $e->getMessage());
 	}catch (MongoException $e) {
 	 	die('Error: ' . $e->getMessage());
 	}
